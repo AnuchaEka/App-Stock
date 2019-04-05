@@ -1,5 +1,7 @@
 {
   "name": "Stock",
-  "integrations": {},
+  "integrations": {
+    "cordova": {}
+  },
   "type": "angular"
 }
