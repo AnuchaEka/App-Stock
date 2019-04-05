@@ -5,8 +5,8 @@ const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
   { path: 'login', loadChildren: './pages/login/login.module#LoginPageModule' },
   { path: 'home', loadChildren: './pages/home/home.module#HomePageModule' },
-  { path: 'changpassword', loadChildren: './pages/changpassword/changpassword.module#ChangpasswordPageModule' },
-  { path: 'editprofile', loadChildren: './pages/editprofile/editprofile.module#EditprofilePageModule' },
+  { path: 'changpassword/:id', loadChildren: './pages/changpassword/changpassword.module#ChangpasswordPageModule' },
+  { path: 'editprofile:id', loadChildren: './pages/editprofile/editprofile.module#EditprofilePageModule' },
   { path: 'account', loadChildren: './pages/account/account.module#AccountPageModule' },
 ];
 
