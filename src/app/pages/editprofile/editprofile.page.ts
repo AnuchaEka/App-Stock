@@ -91,7 +91,7 @@ export class EditprofilePage implements OnInit {
         loading.onWillDismiss().then(() => {
           this.api.presentToast(res.message);
           localStorage.setItem('userData',JSON.stringify(res))
-          this.authen.login(res);
+          this.authen.editdata(res);
           this.router.navigate(['account']);
           
            });

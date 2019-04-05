@@ -33,6 +33,12 @@ export class AuthenService {
       this.authenticationState.next(data);
     });
   }
+
+  editdata(data) {
+    return this.storage.set(TOKEN_KEY, data).then(() => {
+      //this.authenticationState.next(data);
+    });
+  }
  
   logout() {
     return this.storage.remove(TOKEN_KEY).then(() => {
