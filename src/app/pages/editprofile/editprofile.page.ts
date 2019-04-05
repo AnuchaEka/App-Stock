@@ -92,7 +92,7 @@ export class EditprofilePage implements OnInit {
           this.api.presentToast(res.message);
           localStorage.setItem('userData',JSON.stringify(res))
           this.authen.login(res);
-          this.router.navigate(['dashboard']);
+          this.router.navigate(['account']);
           
            });
       
