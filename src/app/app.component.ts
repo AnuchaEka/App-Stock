@@ -92,10 +92,10 @@ export class AppComponent {
          this.userProfile=state.data;  
          this.img=state.img;
            
-         //this.router.navigate(['/home']);
+         this.router.navigate(['/home']);
 
         }else{
-         //this.router.navigate(['/login']);
+         this.router.navigate(['/login']);
         }
      });
 
