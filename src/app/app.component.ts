@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 
-import { Platform,NavController, AlertController,Events} from '@ionic/angular';
+import { Platform,NavController, AlertController,Events } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 
@@ -35,6 +35,14 @@ export class AppComponent {
       direct: 'forward',
     }
     ,
+    {
+      title: 'จองสินค้า',
+      url: '/list',
+      icon: 'cart',
+      direct: 'forward',
+    }
+    ,
+
     {
       title: 'คืนสินค้าจากลูกค้า',
       url: '/list',
@@ -78,7 +86,8 @@ export class AppComponent {
     public alertCtrl: AlertController,
     public navCtrl: NavController,
     private api:ApiService,
-    private events: Events
+    private events: Events,
+    
   ) {
     this.initializeApp();
 
@@ -96,7 +105,7 @@ export class AppComponent {
     this.platform.ready().then(() => {
       this.statusBar.styleDefault();
       this.splashScreen.hide();
-
+ 
       this.api.getAuthen(data=>{
         if(data)
         {
@@ -104,10 +113,11 @@ export class AppComponent {
           this.img=data.img;
           //sessionStorage.setItem('user_id',this.userProfile.u_id);
           //console.log(this.userProfile);
-          
+   
           this.navCtrl.navigateRoot('/home');
           
         }else{
+   
           this.navCtrl.navigateRoot('/login');
         }
 
@@ -130,6 +140,7 @@ export class AppComponent {
 
     });
   }
+
 
   async logout() {
 
