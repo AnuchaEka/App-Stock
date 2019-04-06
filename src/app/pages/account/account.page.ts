@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthenService } from '../../services/authen.service';
 import { NavController, AlertController } from '@ionic/angular';
-import { Router } from '@angular/router';
-
+import { Router,ActivatedRoute } from '@angular/router';
+import { ApiService } from '../../services/api.service';
 @Component({
   selector: 'app-account',
   templateUrl: './account.page.html',
@@ -18,18 +18,40 @@ export class AccountPage implements OnInit {
     public alertCtrl: AlertController,
     public navCtrl: NavController,
     private router: Router,
-  ) { }
+    private route: ActivatedRoute,
+    private api:ApiService
+  ) { 
+
+    this.getdata()
+  }
 
   ngOnInit() {
 
-    this.authen.authenticationState.subscribe(state => {
+  //   this.authen.authenticationState.subscribe(state => {
 
-      if (state!=null) {
-       this.userProfile=state.data;  
-       this.img=state.img;
+  //     if (state!=null) {
+  //      this.userProfile=state.data;  
+  //      this.img=state.img;
 
-      }
-   });
+  //     }
+  //  });
+
+
+  }
+ 
+
+  async getdata(){
+
+    await this.api.getDataById('account/getUser',this.route.snapshot.paramMap.get('id'))
+      .subscribe(res => {
+
+        this.userProfile=res.data;
+        this.img=res.img;
+
+        }, (err) => {
+
+          this.api.presentToast('ไม่พบสัญญาณ internet หรือไม่สามารถติดต่อ server ได้');
+        });
 
   }
 

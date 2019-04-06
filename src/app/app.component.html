@@ -1,6 +1,7 @@
 <ion-app>
   <ion-split-pane>
     <ion-menu>
+      
       <ion-header>
         <ion-toolbar color="primary" class="user-profile" *ngIf="userProfile" >
 
@@ -13,7 +14,7 @@
                 <h1 ><strong>{{userProfile.u_name}} {{userProfile.u_lastname}}</strong></h1>
               </ion-text>
               <ion-menu-toggle class="mto" auto-hide="false">
-                <a class="text08" tappable (click)="goToEditProgile()">
+                <a class="text08" tappable (click)="goToEditProgile(userProfile.u_id)">
                   <ion-text color="light">
                     <ion-icon name="contact"></ion-icon>
                      โปรไฟล์

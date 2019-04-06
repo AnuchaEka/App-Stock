@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { NavController, MenuController, ToastController, AlertController, LoadingController } from '@ionic/angular';
+import { NavController, MenuController, ToastController, AlertController, LoadingController,Events } from '@ionic/angular';
 import { ApiService } from '../../services/api.service';
 import { Router } from  "@angular/router";
 import { AuthenService } from '../../services/authen.service';
@@ -24,7 +24,8 @@ export class LoginPage implements OnInit {
     private formBuilder: FormBuilder,
     private api:ApiService,
     private authService: AuthenService,
-    private router :Router
+    private router :Router,
+    private events :Events
 
   ) { }
 
@@ -58,6 +59,11 @@ export class LoginPage implements OnInit {
 
           localStorage.setItem('userData',JSON.stringify(res))
           this.authService.login(res);
+          
+          sessionStorage.setItem('user_id',res.data.u_id);
+
+          this.events.publish('user:changed', res);
+
           this.router.navigate(['home']);
           
           //this.api.presentToast('เข้าสู่ระบบสำเร็จ');

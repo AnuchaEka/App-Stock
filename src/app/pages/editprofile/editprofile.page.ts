@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
-import { NavController, MenuController, LoadingController } from '@ionic/angular';
-import { Router,ActivatedRoute, } from  "@angular/router";
+import { NavController, MenuController, LoadingController,Events } from '@ionic/angular';
+import { Router,ActivatedRoute } from  "@angular/router";
 import { AuthenService } from '../../services/authen.service';
 import { ApiService } from '../../services/api.service';
 
@@ -26,12 +26,14 @@ export class EditprofilePage implements OnInit {
     private router :Router  ,
     private api :ApiService,
     private route: ActivatedRoute,
+    private events :Events
   ) { 
     this.userProfile =this.api.getStore();
 
     this.res = this.userProfile.data;
     this.img=this.userProfile.img;
   }
+  
 
   ngOnInit() {
     
@@ -92,7 +94,9 @@ export class EditprofilePage implements OnInit {
           this.api.presentToast(res.message);
           localStorage.setItem('userData',JSON.stringify(res))
           this.authen.editdata(res);
-          this.router.navigate(['account']);
+          this.events.publish('user:changed', res);
+
+          this.router.navigate(['account/'+this.route.snapshot.paramMap.get('id')]);
           
            });
       

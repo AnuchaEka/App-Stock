@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 
-import { Platform,NavController, AlertController} from '@ionic/angular';
+import { Platform,NavController, AlertController,Events} from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 
@@ -67,6 +67,8 @@ export class AppComponent {
     }
   ];
 
+  user: any = {role: 'default'};
+
   constructor(
      private platform: Platform,
     private splashScreen: SplashScreen,
@@ -75,29 +77,55 @@ export class AppComponent {
     private router: Router,
     public alertCtrl: AlertController,
     public navCtrl: NavController,
-    private api:ApiService
+    private api:ApiService,
+    private events: Events
   ) {
     this.initializeApp();
+
+    this.events.subscribe('user:changed', user => {
+      // will update the user and immediately change menu accordingly
+     // this.user = user; 
+      this.userProfile =user.data;
+      this.img=user.img;
+   });
+    
   }
+
 
   initializeApp() {
     this.platform.ready().then(() => {
       this.statusBar.styleDefault();
       this.splashScreen.hide();
 
-      
-      this.authen.authenticationState.subscribe(state => {
-
-        if (state!=null) {
-         this.userProfile=state.data;  
-         this.img=state.img;
-           
-         this.router.navigate(['/home']);
-
+      this.api.getAuthen(data=>{
+        if(data)
+        {
+          this.userProfile = data.data;
+          this.img=data.img;
+          //sessionStorage.setItem('user_id',this.userProfile.u_id);
+          //console.log(this.userProfile);
+          
+          this.navCtrl.navigateRoot('/home');
+          
         }else{
-         this.router.navigate(['/login']);
+          this.navCtrl.navigateRoot('/login');
         }
-     });
+
+      });
+
+      
+    //   this.authen.authenticationState.subscribe(state => {
+
+    //     if (state!=null) {
+    //      this.userProfile=state.data;  
+    //      this.img=state.img;
+           
+    //      this.navCtrl.navigateRoot('/home');
+
+    //     }else{
+    //      this.navCtrl.navigateRoot('/login');
+    //     }
+    //  });
 
 
     });
@@ -130,9 +158,9 @@ export class AppComponent {
   }
 
 
-  goToEditProgile(){
+  goToEditProgile(id){
 
-    this.router.navigate(['account']);
+    this.router.navigate(['account/'+id]);
   }
 
 

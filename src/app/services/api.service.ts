@@ -63,8 +63,8 @@ export class ApiService {
       catchError(this.handleError));
   }
   
-  getDataById(id: string): Observable<any> {
-    const url = `${apiUrl}${id}`;
+  getDataById(func,id: string): Observable<any> {
+    const url = `${apiUrl}${func}/${id}`;
     return this.http.get(url,httpOptions).pipe(
       map(this.extractData),
       catchError(this.handleError));
