@@ -4,6 +4,7 @@ import { Observable,throwError } from 'rxjs';
 import { HttpClient,HttpHeaders, HttpErrorResponse } from '@angular/common/http';
 import { catchError, map } from 'rxjs/operators';
 import { BehaviorSubject } from 'rxjs';
+import { SERVER_URL } from '../../environments/environment';
 
 import {
   LoadingController,
@@ -13,7 +14,8 @@ import {
 const httpOptions = {
   headers: new HttpHeaders()
 };
-const apiUrl = "http://phpstack-201718-795798.cloudwaysapps.com/api_app/";
+const apiUrl = SERVER_URL;
+
 
 
 @Injectable({
@@ -21,20 +23,20 @@ const apiUrl = "http://phpstack-201718-795798.cloudwaysapps.com/api_app/";
 })
 export class ApiService {
 
-  private currentUserSub = new BehaviorSubject<any>(null);
- 
-
   constructor(
     private http: HttpClient,
     public loadingCtrl: LoadingController,
     private storage :Storage,
     public toastCtrl:ToastController,
+ 
+
   ) { 
 
-    const user = JSON.parse(localStorage.getItem('userData'));
-    this.currentUserSub.next(user);
-
+ 
   }
+
+
+
 
   private handleError(error: HttpErrorResponse) {
     if (error.error instanceof ErrorEvent) {
@@ -55,7 +57,6 @@ export class ApiService {
     let body = res;
     return body || { };
   }
-
 
   getData(type): Observable<any> {
     return this.http.get(apiUrl+type,httpOptions).pipe(

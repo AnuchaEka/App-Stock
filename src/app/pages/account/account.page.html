@@ -27,9 +27,13 @@
 
 <ion-content>
     <ion-card class="cards-list-demo center" >
-         <div class="avatar" *ngIf="img">
+         <!-- <div class="avatar" *ngIf="img">
             <img src="{{img}}">
-         </div>  
+         </div>   -->
+         <ion-avatar slot="start" class="user-avatar" *ngIf="img">
+          <img src="{{img}}">
+        </ion-avatar>
+        
          <div *ngIf="userProfile">
             <p>
                 <ion-label ><strong class="f-18">{{userProfile.u_name}} {{userProfile.u_lastname}}</strong></ion-label><br>

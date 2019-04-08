@@ -13,6 +13,12 @@ import { IonicStorageModule } from '@ionic/storage';
 
 import { HttpClientModule } from '@angular/common/http';
 
+import { Camera } from '@ionic-native/Camera/ngx';
+import { File } from '@ionic-native/File/ngx';
+import { WebView } from '@ionic-native/ionic-webview/ngx';
+import { FilePath } from '@ionic-native/file-path/ngx';
+
+
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
@@ -25,12 +31,16 @@ import { HttpClientModule } from '@angular/common/http';
       driverOrder: ['indexeddb', 'sqlite', 'websql']
     }),
     HttpClientModule
-  
+     
   ],
   providers: [
     StatusBar,
     SplashScreen,
-    { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
+    { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
+    Camera,
+    File,
+    WebView,
+    FilePath
   ],
   bootstrap: [AppComponent]
 })

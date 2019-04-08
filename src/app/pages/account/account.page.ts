@@ -22,7 +22,7 @@ export class AccountPage implements OnInit {
     private api:ApiService
   ) { 
 
-    this.getdata()
+    //this.getdata()
   }
 
   ngOnInit() {
@@ -39,6 +39,10 @@ export class AccountPage implements OnInit {
 
   }
  
+  ionViewWillEnter() {
+    this.getdata()
+  }
+  
 
   async getdata(){
 

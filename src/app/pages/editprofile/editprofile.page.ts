@@ -1,9 +1,19 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
-import { NavController, MenuController, LoadingController,Events } from '@ionic/angular';
+import { ActionSheetController, NavController, MenuController, LoadingController,Events, Platform,ToastController } from '@ionic/angular';
 import { Router,ActivatedRoute } from  "@angular/router";
 import { AuthenService } from '../../services/authen.service';
 import { ApiService } from '../../services/api.service';
+
+import { Camera, CameraOptions, PictureSourceType } from '@ionic-native/Camera/ngx';
+import { File, FileEntry } from '@ionic-native/File/ngx';
+import { HttpClient } from '@angular/common/http';
+import { WebView } from '@ionic-native/ionic-webview/ngx';
+import { FilePath } from '@ionic-native/file-path/ngx';
+ 
+import { finalize } from 'rxjs/operators';
+import { SERVER_URL } from '../../../environments/environment';
+
 
 @Component({
   selector: 'app-editprofile',
@@ -26,14 +36,49 @@ export class EditprofilePage implements OnInit {
     private router :Router  ,
     private api :ApiService,
     private route: ActivatedRoute,
-    private events :Events
+    private events :Events,
+
+    private camera: Camera, 
+    private file: File, 
+    private http: HttpClient, 
+    private webview: WebView,
+    private actionSheetController: ActionSheetController, 
+    private toastController: ToastController,
+    private plt: Platform, 
+    private ref: ChangeDetectorRef, 
+    private filePath: FilePath
+
   ) { 
+
     this.userProfile =this.api.getStore();
 
-    this.res = this.userProfile.data;
-    this.img=this.userProfile.img;
-  }
   
+    this.res = this.userProfile.data;
+    //this.img=this.userProfile.img;
+   }
+  
+  ionViewWillEnter(){
+    this.getdata();
+  }
+
+  
+
+  async getdata(){
+
+    return await this.api.getDataById('account/getUser',this.route.snapshot.paramMap.get('id'))
+      .subscribe(res => {
+          localStorage.setItem('userData',JSON.stringify(res))
+          this.authen.editdata(res);
+          this.events.publish('user:changed', res);
+          this.img=res.img
+
+        }, (err) => {
+
+          this.api.presentToast('ไม่พบสัญญาณ internet หรือไม่สามารถติดต่อ server ได้');
+        });
+
+  }
+
 
   ngOnInit() {
     
@@ -107,6 +152,152 @@ export class EditprofilePage implements OnInit {
         });
 
   
+}
+
+//Edit Profile Image
+
+pathForImage(img) {
+  if (img === null) {
+    return '';
+  } else {
+    let converted = this.webview.convertFileSrc(img);
+    return converted;
+  }
+}
+
+async presentToast(text) {
+  const toast = await this.toastController.create({
+      message: text,
+      position: 'bottom',
+      duration: 3000
+  });
+  toast.present();
+}
+
+async selectImage() {
+  const actionSheet = await this.actionSheetController.create({
+      header: "Select Image source",
+      buttons: [{
+              text: 'Load from Library',
+              handler: () => {
+                  this.takePicture(this.camera.PictureSourceType.PHOTOLIBRARY);
+              }
+          },
+          {
+              text: 'Use Camera',
+              handler: () => {
+                  this.takePicture(this.camera.PictureSourceType.CAMERA);
+              }
+          },
+          {
+              text: 'Cancel',
+              role: 'cancel'
+          }
+      ]
+  });
+  await actionSheet.present();
+}
+
+
+takePicture(sourceType: PictureSourceType) {
+  var options: CameraOptions = {
+      quality: 100,
+      sourceType: sourceType,
+      saveToPhotoAlbum: false,
+      correctOrientation: true
+  };
+
+  this.camera.getPicture(options).then(imagePath => {
+      if (this.plt.is('android') && sourceType === this.camera.PictureSourceType.PHOTOLIBRARY) {
+          this.filePath.resolveNativePath(imagePath)
+              .then(filePath => {
+                  let correctPath = filePath.substr(0, filePath.lastIndexOf('/') + 1);
+                  let currentName = imagePath.substring(imagePath.lastIndexOf('/') + 1, imagePath.lastIndexOf('?'));
+                this.copyFileToLocalDir(correctPath, currentName, this.createFileName());
+              });
+      } else {
+          var currentName = imagePath.substr(imagePath.lastIndexOf('/') + 1);
+          var correctPath = imagePath.substr(0, imagePath.lastIndexOf('/') + 1);
+          this.copyFileToLocalDir(correctPath, currentName, this.createFileName());
+      }
+  });
+
+}
+
+createFileName() {
+var d = new Date(),
+    n = d.getTime(),
+    newFileName = n + ".jpg";
+return newFileName;
+}
+
+copyFileToLocalDir(namePath, currentName, newFileName) {
+  this.file.copyFile(namePath, currentName, this.file.dataDirectory, newFileName).then(success => {
+    
+     // this.updateStoredImages(newFileName);
+     let filePath = this.file.dataDirectory + newFileName;
+     let resPath = this.pathForImage(filePath);
+     let newEntry = {
+         name: newFileName,
+         path: resPath,
+         filePath: filePath
+     };
+     this.startUpload(newEntry)
+
+  }, error => {
+      this.presentToast('Error while storing file.');
+  });
+}
+
+startUpload(imgEntry) {
+  this.file.resolveLocalFilesystemUrl(imgEntry.filePath)
+      .then(entry => {
+          ( < FileEntry > entry).file(file => this.readFile(file))
+      })
+      .catch(err => {
+          this.presentToast('Error while reading file.');
+      });
+}
+
+readFile(file: any) {
+  const reader = new FileReader();
+  reader.onloadend = () => {
+      const formData = new FormData();
+      const imgBlob = new Blob([reader.result], {
+          type: file.type
+      });
+      formData.append('file', imgBlob, file.name);
+      this.uploadImageData(formData);
+  };
+  reader.readAsArrayBuffer(file);
+}
+
+async uploadImageData(formData: FormData) {
+  const loading = await this.loadingCtrl.create({
+      message: 'Uploading image...',
+  });
+  await loading.present();
+
+  this.http.post( SERVER_URL+"account/upload/"+this.route.snapshot.paramMap.get('id'), formData)
+      .pipe(
+          finalize(() => {
+              loading.dismiss();
+          })
+      )
+      .subscribe(res => {
+          if (res['status']) {
+
+            // localStorage.setItem('userData',JSON.stringify(res))
+            // this.authen.editdata(res);
+            this.getdata();
+            this.presentToast(res['message'])
+
+
+          } else {
+              this.presentToast(res['message'])
+          }
+      });
+      
 }
 
 

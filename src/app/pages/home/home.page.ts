@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ApiService } from '../../services/api.service';
+import { AuthenService } from '../../services/authen.service';
 
 import {
   LoadingController,
@@ -24,10 +25,12 @@ export class HomePage implements OnInit {
     public alertCtrl: AlertController,
     public toastCtrl: ToastController,
     public api: ApiService, 
-    public loadingController: LoadingController
+    public loadingController: LoadingController,
+    private authen :AuthenService,
   ) { 
 
-   
+    this.userProfile =this.api.getStore();
+    this.resdata = this.userProfile.data;
 
   }
 
@@ -37,37 +40,36 @@ export class HomePage implements OnInit {
 
   ionViewWillEnter() {
     this.menuCtrl.enable(true);
-  }
-
-  
+     }
 
 
-  async getData() {
+
+  // async getData() {
     
-    const loading = await this.loadingController.create({
-      message: 'Please wait...',
-      spinner: 'crescent',
-      duration: 2000
-    });
+  //   const loading = await this.loadingController.create({
+  //     message: 'Please wait...',
+  //     spinner: 'crescent',
+  //     duration: 2000
+  //   });
 
-    await loading.present();
-    await this.api.getData('getShop')
-      .subscribe(res => {
-        //console.log(res);
-        this.resdata = res;
-        loading.dismiss();
-      }, err => {
-        //console.log(err);
-        loading.dismiss();
-      });
-  }
+  //   await loading.present();
+  //   await this.api.getData('getShop')
+  //     .subscribe(res => {
+  //       //console.log(res);
+  //       this.resdata = res;
+  //       loading.dismiss();
+  //     }, err => {
+  //       //console.log(err);
+  //       loading.dismiss();
+  //     });
+  // }
 
-  getUserDetails() {
-    this.api.getStore().subscribe(res => {
-      this.userProfile = res.data;
-      console.log(this.userProfile);
+  // getUserDetails() {
+  //   this.api.getStore().subscribe(res => {
+  //     this.userProfile = res.data;
+  //     console.log(this.userProfile);
       
-    });
-  }
+  //   });
+  // }
 
 }

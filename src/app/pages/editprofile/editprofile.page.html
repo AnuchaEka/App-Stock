@@ -14,10 +14,14 @@
 <ion-content padding class="form-content">
     <ion-card no-margin>
       <ion-card-content class="center">
-        <div class="avatar" *ngIf="img">
+        <!-- <div class="avatar" *ngIf="img">
             <img src="{{img}}">
-         </div> 
-        <ion-button icon-left color="secondary">
+         </div>  -->
+         <ion-avatar slot="start" class="user-avatar" *ngIf="img">
+          <img src="{{img}}">
+        </ion-avatar>
+
+        <ion-button icon-left color="secondary" (click)="selectImage()">
           <ion-icon name="create"></ion-icon> 
           แก้ไขรูปโปรไฟล์
         </ion-button>
