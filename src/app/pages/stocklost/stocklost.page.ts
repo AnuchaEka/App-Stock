@@ -11,11 +11,18 @@ export class StocklostPage implements OnInit {
    id: number;
 
   constructor(
-   private navParams: NavParams,
+   public navParams: NavParams,
    private modalCtrl: ModalController
-    ) { }
+    ) { 
+
+      this.item = navParams.get('item');
+      this.id = navParams.get('id');
+    }
 
   ngOnInit() {
+    console.log(this.item);
+    console.log(this.id);
+    
   }
 
   close() {
