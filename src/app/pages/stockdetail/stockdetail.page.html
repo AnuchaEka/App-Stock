@@ -1,0 +1,25 @@
+<ion-header>
+    <ion-toolbar color="primary">
+        <ion-buttons slot="start">
+            <ion-back-button id="backButton" defaultHref="/stocklist" text="ย้อนกลับ"></ion-back-button>
+  
+          </ion-buttons>
+      <ion-title>
+          {{name}}
+      </ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <ion-content >
+      <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+        <ion-refresher-content></ion-refresher-content>
+      </ion-refresher>
+
+        <ion-item *ngFor="let item of resdata"  class="item" (click)="open(item,id)">
+            <ion-label> {{item.name}} </ion-label>
+            <ion-badge slot="end">{{item.qty}}</ion-badge>
+          </ion-item>
+
+
+    </ion-content>
+

@@ -17,11 +17,14 @@ import { Camera } from '@ionic-native/Camera/ngx';
 import { File } from '@ionic-native/File/ngx';
 import { WebView } from '@ionic-native/ionic-webview/ngx';
 import { FilePath } from '@ionic-native/file-path/ngx';
+import { PhotoViewer } from '@ionic-native/photo-viewer/ngx';
+
+import { StocklostPage } from './pages/stocklost/stocklost.page';
 
 
 @NgModule({
-  declarations: [AppComponent],
-  entryComponents: [],
+  declarations: [AppComponent,StocklostPage],
+  entryComponents: [StocklostPage],
   imports: [
     BrowserModule, 
     IonicModule.forRoot(), 
@@ -40,7 +43,8 @@ import { FilePath } from '@ionic-native/file-path/ngx';
     Camera,
     File,
     WebView,
-    FilePath
+    FilePath,
+    PhotoViewer
   ],
   bootstrap: [AppComponent]
 })

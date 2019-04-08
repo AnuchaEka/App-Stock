@@ -48,12 +48,22 @@
               </ion-label>
             </ion-item>
           </ion-menu-toggle>
-          
-          <div>
+
+          <!-- <div *ngIf="user.role == 'ผู้ดูแลระบบ'">
           <ion-list-header color="dark">
-            <ion-label>จัดการข้อมูล</ion-label>
+            <ion-label>จัดการข้อมูลหลัก</ion-label>
           </ion-list-header>
-        </div>
+          <ion-menu-toggle auto-hide="false" *ngFor="let p of appPages">
+            <ion-item [routerLink]="[p.url]" color="primary" class="menus">
+              <ion-icon slot="start" [name]="p.icon" color="light" item-start></ion-icon>
+              <ion-label>
+                {{p.title}}
+              </ion-label>
+            </ion-item>
+          </ion-menu-toggle>
+
+
+        </div> -->
 
         </ion-list>
 

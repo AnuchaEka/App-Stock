@@ -55,7 +55,7 @@ export class ApiService {
   
   private extractData(res: Response) {
     let body = res;
-    return body || { };
+    return body || [];
   }
 
   getData(type): Observable<any> {

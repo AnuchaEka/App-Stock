@@ -35,13 +35,13 @@ export class AppComponent {
       direct: 'forward',
     }
     ,
-    {
-      title: 'จองสินค้า',
-      url: '/list',
-      icon: 'cart',
-      direct: 'forward',
-    }
-    ,
+    // {
+    //   title: 'จองสินค้า',
+    //   url: '/list',
+    //   icon: 'cart',
+    //   direct: 'forward',
+    // }
+    // ,
 
     {
       title: 'คืนสินค้าจากลูกค้า',
@@ -53,7 +53,7 @@ export class AppComponent {
     ,
     {
       title: 'สต๊อกสินค้าทั้งหมด',
-      url: '/list',
+      url: '/stocklist',
       icon: 'logo-buffer',
       direct: 'forward',
     }
@@ -75,7 +75,7 @@ export class AppComponent {
     }
   ];
 
-  user: any = {role: 'default'};
+  user: any = {role: 'ผู้ดูแลระบบ'};
 
   constructor(
      private platform: Platform,
@@ -90,11 +90,14 @@ export class AppComponent {
     
   ) {
     this.initializeApp();
+    //console.log(this.user.role);
+    
 
     this.events.subscribe('user:changed', user => {
       // will update the user and immediately change menu accordingly
      // this.user = user; 
       this.userProfile =user.data;
+      this.user.role = this.userProfile.u_position;
       this.img=user.img;
    });
     
@@ -111,14 +114,15 @@ export class AppComponent {
         {
           this.userProfile = data.data;
           this.img=data.img;
+          this.user.role = this.userProfile.u_position;
           //sessionStorage.setItem('user_id',this.userProfile.u_id);
           //console.log(this.userProfile);
    
-          this.navCtrl.navigateRoot('/home');
+         // this.navCtrl.navigateRoot('/home');
           
         }else{
    
-          this.navCtrl.navigateRoot('/login');
+          // this.navCtrl.navigateRoot('/login');
         }
 
       });
