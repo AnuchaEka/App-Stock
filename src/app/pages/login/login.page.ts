@@ -74,7 +74,7 @@ export class LoginPage implements OnInit {
         //this.router.navigate(['/detail/'+id]);
       }, (err) => {
         //console.log(err);
-        this.api.presentToast('ไม่พบสัญญาณ internet หรือไม่สามารถติดต่อ server ได้');
+        this.api.showMiddlewareAlert(err)
       });
   }
 

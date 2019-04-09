@@ -9,6 +9,7 @@ import { SERVER_URL } from '../../environments/environment';
 import {
   LoadingController,
   ToastController,
+  AlertController
  } from '@ionic/angular';
 
 const httpOptions = {
@@ -28,7 +29,7 @@ export class ApiService {
     public loadingCtrl: LoadingController,
     private storage :Storage,
     public toastCtrl:ToastController,
- 
+    private alertCtrl:AlertController
 
   ) { 
 
@@ -45,12 +46,15 @@ export class ApiService {
     } else {
       // The backend returned an unsuccessful response code.
       // The response body may contain clues as to what went wrong,
-      console.error(
+       console.error(
         `Backend returned code ${error.status}, ` +
         `body was: ${error.error}`);
+      //console.log(error.status);
+      
+      
     }
     // return an observable with a user-facing error message
-    return throwError('Something bad happened; please try again later.');
+    return throwError(`${error.status}`);
   }
   
   private extractData(res: Response) {
@@ -125,6 +129,43 @@ export class ApiService {
     toast.present();
   }
 
+  async showMiddlewareAlert(status)
+  {
+
+    console.log(status);
+    
+    switch(status)
+    {
+      case 0 : case "0" :
+      {
+        this.presentToast("ไม่พบสัญญาณ internet หรือไม่สามารถติดต่อ server ได้");
+        
+        break;
+      }
+      case 500: case "500" :
+      {
+        this.presentToast("พบปัญหา error ของ webservice กรุณาติดต่อผู้ดูแลระบบ");
+        break;
+      }
+    }
+  }
+
+  async  showAlert(title:any,message:any,callback:Function = null)
+  {
+    let alert = await this.alertCtrl.create({
+      header: title,
+      message: message,
+      mode:"ios",
+      buttons: [{
+        text: 'ปิด',
+        handler: () => {
+          if(callback)
+          callback();
+        }
+      }]
+    });
+    await  alert.present();
+  }
   
 
  

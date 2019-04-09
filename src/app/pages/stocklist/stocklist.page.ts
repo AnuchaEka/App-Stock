@@ -46,7 +46,8 @@ export class StocklistPage implements OnInit {
         this.items = res;
         loading.dismiss();
       }, err => {
-       // console.log(err);
+        //console.log(err);
+        this.api.showMiddlewareAlert(err)
         loading.dismiss();
       });
   }
@@ -71,7 +72,7 @@ export class StocklistPage implements OnInit {
         //console.log(res);
         }, (err) => {
 
-          this.api.presentToast('ไม่พบสัญญาณ internet หรือไม่สามารถติดต่อ server ได้');
+          this.api.showMiddlewareAlert(err)
         });
 
     }else{

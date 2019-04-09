@@ -118,11 +118,11 @@ export class AppComponent {
           //sessionStorage.setItem('user_id',this.userProfile.u_id);
           //console.log(this.userProfile);
    
-         // this.navCtrl.navigateRoot('/home');
+          this.navCtrl.navigateRoot('/home');
           
         }else{
    
-          // this.navCtrl.navigateRoot('/login');
+          this.navCtrl.navigateRoot('/login');
         }
 
       });

@@ -30,12 +30,12 @@
   <ion-list >
     
     <div *ngIf="items?.length != 0">
-    <ion-item  *ngFor="let item of items" (click)="getDetail(item.p_id,item.name)" >
+    <ion-item  *ngFor="let item of items"  >
       <div item-start>
         <img src="{{item.img}}"   class="img" (click)="zoom(item.img)">
       </div>
      
-      <div >
+      <div (click)="getDetail(item.p_id,item.name)">
         <label>
           {{ item.name }}
        </label> 
@@ -46,7 +46,7 @@
      
        <p>
           <ion-badge >สินค้าคงเหลือ : {{item.qtyall}}</ion-badge>
-        </p>
+       </p>
 
 
         <!-- <p>

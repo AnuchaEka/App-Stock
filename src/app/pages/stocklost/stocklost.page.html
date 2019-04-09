@@ -12,6 +12,35 @@
     </ion-toolbar>
   </ion-header>
 
-<ion-content>
+  <ion-content>
+    <ion-row style="border-bottom: 1px solid #a1a1a1;background-color:#085dce;color: #fff">
+        <ion-col col >
+            <ion-label >จำนวนสินค้า<br>นำเข้า</ion-label>
+          </ion-col>
+        <ion-col col>
+        <ion-label >สินค้าคงเหลือ</ion-label>
+      </ion-col>
+      <ion-col col>
+        <ion-label >วันที่รับสินค้า</ion-label>
+      </ion-col>
+        <ion-col col>
+        <ion-label >นำเข้าจาก</ion-label>
+      </ion-col>
+    </ion-row>
+    <ion-row style="border-bottom: 1px solid #ddd;"  *ngFor="let items of resdata">
+        <ion-col col >
+        <ion-label >{{items.stk_qtyimport}}</ion-label>
+      </ion-col>
+      <ion-col col>
+        <ion-label >{{items.stk_number}}</ion-label>
+      </ion-col>
+        <ion-col col>
+        <ion-label >{{items.stk_receivingdate}}</ion-label>
+      </ion-col>
+      <ion-col col>
+          <ion-label >{{items.importname}}</ion-label>
+        </ion-col>
+    </ion-row>
+    
 
 </ion-content>
