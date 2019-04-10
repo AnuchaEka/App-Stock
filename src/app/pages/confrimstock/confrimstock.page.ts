@@ -5,11 +5,11 @@ import { ApiService } from '../../services/api.service';
 import { LoadingController } from '@ionic/angular';
 
 @Component({
-  selector: 'app-producttostock',
-  templateUrl: './producttostock.page.html',
-  styleUrls: ['./producttostock.page.scss'],
+  selector: 'app-confrimstock',
+  templateUrl: './confrimstock.page.html',
+  styleUrls: ['./confrimstock.page.scss'],
 })
-export class ProducttostockPage implements OnInit {
+export class ConfrimstockPage implements OnInit {
 
   options:BarcodeScannerOptions;
   encodText:string='';
@@ -21,10 +21,7 @@ export class ProducttostockPage implements OnInit {
     public scanner:BarcodeScanner,
     private api:ApiService,
     public loadingCtrl: LoadingController,
-    ) { 
-
-
-  }
+  ) { }
 
   ngOnInit() {
     this.getData();
@@ -39,7 +36,9 @@ export class ProducttostockPage implements OnInit {
     }, 2000);
   }
 
- scan(){
+
+
+  scan(){
     this.options={
       prompt:'สแกนรหัส QR หรือบาร์โค้ดของคุณ'
     };
@@ -48,7 +47,7 @@ export class ProducttostockPage implements OnInit {
 
      let userid = sessionStorage.getItem('user_id');
      
-     this.api.postData({'code':data.text,'userid':userid},'stock/gotostock')
+     this.api.postData({'code':data.text,'userid':userid},'stock/checkstock')
     .subscribe(res => {
         //let id = res['status'];
         if(res.status==1){
@@ -75,7 +74,7 @@ export class ProducttostockPage implements OnInit {
   
   }
 
-    async getData() {
+  async getData() {
     
     const loading = await this.loadingCtrl.create({
       message: 'Please wait...',
@@ -84,7 +83,7 @@ export class ProducttostockPage implements OnInit {
     });
 
     await loading.present();
-    await this.api.getData('stock/showstock')
+    await this.api.getData('stock/viewcomfrimstock')
       .subscribe(res => {
         //console.log(res);
         this.resdata = res;
@@ -94,8 +93,5 @@ export class ProducttostockPage implements OnInit {
         loading.dismiss();
       });
   }
-
-
-
 
 }

@@ -69,7 +69,7 @@ export class AppComponent {
     ,
     {
       title: 'ตรวจสอบสินค้าก่อนเข้าโกดังเล็ก',
-      url: '/list',
+      url: '/confrimstock',
       icon: 'checkbox-outline',
       direct: 'forward',
     }
