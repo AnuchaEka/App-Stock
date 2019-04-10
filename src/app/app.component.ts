@@ -61,7 +61,7 @@ export class AppComponent {
     ,
     {
       title: 'เบิกสินค้าจากโกดังใหญ่',
-      url: '/list',
+      url: '/producttostock',
       icon: 'archive',
       direct: 'forward',
     }
@@ -98,6 +98,7 @@ export class AppComponent {
      // this.user = user; 
       this.userProfile =user.data;
       this.user.role = this.userProfile.u_position;
+      sessionStorage.setItem('user_id',this.userProfile.u_id);
       this.img=user.img;
    });
     
@@ -115,10 +116,10 @@ export class AppComponent {
           this.userProfile = data.data;
           this.img=data.img;
           this.user.role = this.userProfile.u_position;
-          //sessionStorage.setItem('user_id',this.userProfile.u_id);
+          sessionStorage.setItem('user_id',this.userProfile.u_id);
           //console.log(this.userProfile);
    
-          this.navCtrl.navigateRoot('/home');
+          this.navCtrl.navigateRoot('/producttostock');
           
         }else{
    

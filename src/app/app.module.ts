@@ -20,7 +20,7 @@ import { FilePath } from '@ionic-native/file-path/ngx';
 import { PhotoViewer } from '@ionic-native/photo-viewer/ngx';
 
 import { StocklostPage } from './pages/stocklost/stocklost.page';
-
+import { BarcodeScanner } from '@ionic-native/barcode-scanner/ngx';
 
 @NgModule({
   declarations: [AppComponent,StocklostPage],
@@ -44,7 +44,8 @@ import { StocklostPage } from './pages/stocklost/stocklost.page';
     File,
     WebView,
     FilePath,
-    PhotoViewer
+    PhotoViewer,
+    BarcodeScanner
   ],
   bootstrap: [AppComponent]
 })
