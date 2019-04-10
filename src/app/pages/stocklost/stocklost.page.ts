@@ -29,6 +29,19 @@ export class StocklostPage implements OnInit {
    this.getData();
   }
 
+
+  
+
+  doRefresh(event) {
+    //console.log('Begin async operation');
+    setTimeout(() => {
+     // console.log('Async operation has ended');
+     this.getData()
+     event.target.complete();
+    }, 2000);
+  }
+  
+
     
    async getData(){
 

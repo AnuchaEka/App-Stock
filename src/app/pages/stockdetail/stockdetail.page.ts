@@ -43,7 +43,7 @@ export class StockdetailPage implements OnInit {
     //console.log('Begin async operation');
     setTimeout(() => {
      // console.log('Async operation has ended');
-     //this.getstock()
+     this.getData()
      event.target.complete();
     }, 2000);
   }
