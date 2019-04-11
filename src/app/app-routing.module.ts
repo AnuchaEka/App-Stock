@@ -12,8 +12,13 @@ const routes: Routes = [
   { path: 'account/:id', loadChildren: './pages/account/account.module#AccountPageModule' },
   { path: 'stocklist', loadChildren: './pages/stocklist/stocklist.module#StocklistPageModule' },
   { path: 'stockdetail/:id/:name', loadChildren: './pages/stockdetail/stockdetail.module#StockdetailPageModule' },
-  { path: 'stocklost', loadChildren: './pages/stocklost/stocklost.module#StocklostPageModule' },  { path: 'producttostock', loadChildren: './pages/producttostock/producttostock.module#ProducttostockPageModule' },
+  { path: 'stocklost', loadChildren: './pages/stocklost/stocklost.module#StocklostPageModule' },
+  { path: 'producttostock', loadChildren: './pages/producttostock/producttostock.module#ProducttostockPageModule' },
   { path: 'confrimstock', loadChildren: './pages/confrimstock/confrimstock.module#ConfrimstockPageModule' },
+  { path: 'cutstockshop', loadChildren: './pages/cutstockshop/cutstockshop.module#CutstockshopPageModule' },
+  { path: 'cutstocktoshop/:id/:name', loadChildren: './pages/cutstocktoshop/cutstocktoshop.module#CutstocktoshopPageModule' },
+  { path: 'cutstockhistory/:id/:name', loadChildren: './pages/cutstockhistory/cutstockhistory.module#CutstockhistoryPageModule' },
+
 
 
 

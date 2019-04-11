@@ -1,0 +1,54 @@
+<ion-header>
+    <ion-toolbar color="primary">
+      <ion-buttons slot="start">
+        <ion-menu-button color="light"></ion-menu-button>
+      </ion-buttons>
+      <ion-title>
+          <ion-text color="light">
+            <ion-text color="light" class="fw700">เบิกสินค้าส่งให้ลูกค้า</ion-text>
+          </ion-text>
+      </ion-title>
+
+    </ion-toolbar>
+
+  </ion-header>
+
+  <ion-content padding>
+  
+      <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+        <ion-refresher-content></ion-refresher-content>
+      </ion-refresher>
+    
+      <ion-list >
+    
+          <div *ngIf="resdata?.length != 0">
+          <ion-item  *ngFor="let item of resdata"  (click)="getPage(item.sh_id,item.name)" class="item">
+            <div item-start>
+              <img src="{{item.img}}"   class="img" >
+            </div>
+           
+            <div >
+              <ion-label>
+                {{ item.name }}
+             </ion-label> 
+              
+             <p>
+                <ion-badge color="secondary">ส่งทั้งหมด : {{item.count}}</ion-badge>&nbsp;
+                <ion-badge >ส่งวันนี้ : {{item.counttoday}}</ion-badge>
+             </p>
+        
+            </div>
+         
+            
+          </ion-item>
+        </div>
+          <div  *ngIf="resdata?.length == 0" class="itemnone">
+            <p style="color:red;">ไม่มีสินค้า</p>
+          </div>
+       
+       
+         
+        </ion-list>
+
+    
+    </ion-content>

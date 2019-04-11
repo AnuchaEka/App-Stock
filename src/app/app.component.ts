@@ -30,7 +30,7 @@ export class AppComponent {
     },
     {
       title: 'เบิกสินค้าส่งให้ลูกค้า',
-      url: '/list',
+      url: '/cutstockshop',
       icon: 'arrow-round-up',
       direct: 'forward',
     }
@@ -119,7 +119,7 @@ export class AppComponent {
           sessionStorage.setItem('user_id',this.userProfile.u_id);
           //console.log(this.userProfile);
    
-          this.navCtrl.navigateRoot('/producttostock');
+          this.navCtrl.navigateRoot('/cutstockshop');
           
         }else{
    
