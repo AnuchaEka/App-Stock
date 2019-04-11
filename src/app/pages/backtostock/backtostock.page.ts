@@ -1,15 +1,19 @@
 import { Component, OnInit } from '@angular/core';
+import { ApiService } from '../../services/api.service';
+import { Router,ActivatedRoute } from '@angular/router';
+import { LoadingController} from '@ionic/angular';
+
 import { BarcodeScanner, BarcodeScannerOptions } from '@ionic-native/barcode-scanner/ngx';
 
-import { ApiService } from '../../services/api.service';
-import { LoadingController } from '@ionic/angular';
-
 @Component({
-  selector: 'app-confrimstock',
-  templateUrl: './confrimstock.page.html',
-  styleUrls: ['./confrimstock.page.scss'],
+  selector: 'app-backtostock',
+  templateUrl: './backtostock.page.html',
+  styleUrls: ['./backtostock.page.scss'],
 })
-export class ConfrimstockPage implements OnInit {
+export class BacktostockPage implements OnInit {
+
+  name;
+  id
 
   options:BarcodeScannerOptions;
   encodText:string='';
@@ -19,22 +23,23 @@ export class ConfrimstockPage implements OnInit {
 
   userProfile;
   user;
-  
+ 
+
   constructor(
-    public scanner:BarcodeScanner,
+    private router: Router,
+    private route: ActivatedRoute,
     private api:ApiService,
     public loadingCtrl: LoadingController,
+    public scanner:BarcodeScanner,
   ) {
+    this.name = this.route.snapshot.paramMap.get('name');
+    this.id = this.route.snapshot.paramMap.get('id');
 
     this.userProfile =this.api.getStore();
     this.user = this.userProfile.data;
    }
 
-  ngOnInit() {
-    this.getData();
-  }
-
-  doRefresh(event) {
+   doRefresh(event) {
     //console.log('Begin async operation');
     setTimeout(() => {
      // console.log('Async operation has ended');
@@ -43,6 +48,9 @@ export class ConfrimstockPage implements OnInit {
     }, 2000);
   }
 
+  ngOnInit() {
+    this.getData();
+  }
 
 
   scan(){
@@ -52,9 +60,9 @@ export class ConfrimstockPage implements OnInit {
   this.scanner.scan(this.options).then((data)=>{
     this.scannedData=data;
 
-    let userid = this.user.u_id;
+     let userid = this.user.u_id;
      
-     this.api.postData({'code':data.text,'userid':userid},'stock/checkstock')
+     this.api.postData({'code':data.text,'userid':userid,'shopID':this.id},'backtostock/backstock')
     .subscribe(res => {
         //let id = res['status'];
         if(res.status==1){
@@ -81,7 +89,7 @@ export class ConfrimstockPage implements OnInit {
   
   }
 
-  async getData() {
+    async getData() {
     
     const loading = await this.loadingCtrl.create({
       message: 'Please wait...',
@@ -90,7 +98,7 @@ export class ConfrimstockPage implements OnInit {
     });
 
     await loading.present();
-    await this.api.getData('stock/viewcomfrimstock')
+    await this.api.getDataById('backtostock/viewsbacktock',this.id)
       .subscribe(res => {
         //console.log(res);
         this.resdata = res;
@@ -100,5 +108,4 @@ export class ConfrimstockPage implements OnInit {
         loading.dismiss();
       });
   }
-
 }

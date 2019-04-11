@@ -4,24 +4,29 @@ import { LoadingController} from '@ionic/angular';
 import { Router,ActivatedRoute } from '@angular/router';
 
 @Component({
-  selector: 'app-cutstockshop',
-  templateUrl: './cutstockshop.page.html',
-  styleUrls: ['./cutstockshop.page.scss'],
+  selector: 'app-backtoshop',
+  templateUrl: './backtoshop.page.html',
+  styleUrls: ['./backtoshop.page.scss'],
 })
-export class CutstockshopPage implements OnInit {
+export class BacktoshopPage implements OnInit {
+
   resdata;
+ 
   constructor(
     private api:ApiService,
     public loadingCtrl: LoadingController,
     private router: Router,
     private route: ActivatedRoute,
-  ) { }
+  ) { 
+  
 
-  ngOnInit() {
+  }
+  
+  ionViewWillEnter() {
     this.getData()
   }
 
-  ionViewWillEnter() {
+  ngOnInit() {
     this.getData()
   }
 
@@ -34,9 +39,9 @@ export class CutstockshopPage implements OnInit {
     }, 2000);
   }
 
-
+  
   async getData() {
-    
+     
     const loading = await this.loadingCtrl.create({
       message: 'Please wait...',
       spinner: 'crescent',
@@ -55,9 +60,10 @@ export class CutstockshopPage implements OnInit {
       });
   }
 
-  getPage(id,name){
-    this.router.navigate(['cutstocktoshop/'+id+'/'+name]);
-  }
 
+  
+  getPage(id,name){
+    this.router.navigate(['backtostock/'+id+'/'+name]);
+  }
 
 }

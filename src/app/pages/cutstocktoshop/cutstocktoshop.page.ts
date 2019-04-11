@@ -21,6 +21,9 @@ export class CutstocktoshopPage implements OnInit {
   scannedData:any={};
   resdata;
 
+  userProfile;
+  user;
+
   constructor(
     private router: Router,
     private route: ActivatedRoute,
@@ -30,6 +33,9 @@ export class CutstocktoshopPage implements OnInit {
   ) {
     this.name = this.route.snapshot.paramMap.get('name');
     this.id = this.route.snapshot.paramMap.get('id');
+
+    this.userProfile =this.api.getStore();
+    this.user = this.userProfile.data;
    }
 
    doRefresh(event) {
@@ -53,9 +59,9 @@ export class CutstocktoshopPage implements OnInit {
   this.scanner.scan(this.options).then((data)=>{
     this.scannedData=data;
 
-     let userid = sessionStorage.getItem('user_id');
+    let userid = this.user.u_id;
      
-     this.api.postData({'code':data.text,'userid':userid},'cutstock/cutstocktoshop')
+     this.api.postData({'code':data.text,'userid':userid,'shopID':this.id},'cutstock/cutstocktoshop')
     .subscribe(res => {
         //let id = res['status'];
         if(res.status==1){

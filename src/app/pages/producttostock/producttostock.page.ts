@@ -17,12 +17,17 @@ export class ProducttostockPage implements OnInit {
   scannedData:any={};
   resdata;
 
+  userProfile;
+  user;
+
   constructor(
     public scanner:BarcodeScanner,
     private api:ApiService,
     public loadingCtrl: LoadingController,
     ) { 
 
+      this.userProfile =this.api.getStore();
+      this.user = this.userProfile.data;
 
   }
 
@@ -46,7 +51,7 @@ export class ProducttostockPage implements OnInit {
   this.scanner.scan(this.options).then((data)=>{
     this.scannedData=data;
 
-     let userid = sessionStorage.getItem('user_id');
+    let userid = this.user.u_id;
      
      this.api.postData({'code':data.text,'userid':userid},'stock/gotostock')
     .subscribe(res => {

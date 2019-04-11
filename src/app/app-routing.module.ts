@@ -18,6 +18,9 @@ const routes: Routes = [
   { path: 'cutstockshop', loadChildren: './pages/cutstockshop/cutstockshop.module#CutstockshopPageModule' },
   { path: 'cutstocktoshop/:id/:name', loadChildren: './pages/cutstocktoshop/cutstocktoshop.module#CutstocktoshopPageModule' },
   { path: 'cutstockhistory/:id/:name', loadChildren: './pages/cutstockhistory/cutstockhistory.module#CutstockhistoryPageModule' },
+  { path: 'backtoshop', loadChildren: './pages/backtoshop/backtoshop.module#BacktoshopPageModule' },
+  { path: 'backtostock/:id/:name', loadChildren: './pages/backtostock/backtostock.module#BacktostockPageModule' },
+
 
 
 

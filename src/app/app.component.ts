@@ -45,7 +45,7 @@ export class AppComponent {
 
     {
       title: 'คืนสินค้าจากลูกค้า',
-      url: '/list',
+      url: '/backtoshop',
       icon: 'swap',
       direct: 'forward',
     }
@@ -119,7 +119,7 @@ export class AppComponent {
           sessionStorage.setItem('user_id',this.userProfile.u_id);
           //console.log(this.userProfile);
    
-          this.navCtrl.navigateRoot('/cutstockshop');
+          this.navCtrl.navigateRoot('/backtoshop');
           
         }else{
    
