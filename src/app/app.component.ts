@@ -1,10 +1,10 @@
 import { Component } from '@angular/core';
 
-import { Platform,NavController, AlertController,Events } from '@ionic/angular';
+import { Platform,NavController, AlertController,Events,MenuController } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 
-import { Router } from '@angular/router';
+import { Router ,RouterEvent} from '@angular/router';
 import { AuthenService } from './services/authen.service';
 import { ApiService } from './services/api.service';
 
@@ -76,6 +76,7 @@ export class AppComponent {
   ];
 
   user: any = {role: 'ผู้ดูแลระบบ'};
+  selectedPath = '';
 
   constructor(
      private platform: Platform,
@@ -87,10 +88,23 @@ export class AppComponent {
     public navCtrl: NavController,
     private api:ApiService,
     private events: Events,
+    private menu: MenuController
     
   ) {
     this.initializeApp();
     //console.log(this.user.role);
+
+    this.router.events.subscribe((event: RouterEvent) => {
+      
+
+      if (event && event.url) {
+        this.selectedPath = event.url;
+        //alert('ls');
+      }
+      
+    });
+
+
     
 
     this.events.subscribe('user:changed', user => {
@@ -98,8 +112,16 @@ export class AppComponent {
      // this.user = user; 
       this.userProfile =user.data;
       this.user.role = this.userProfile.u_position;
-      sessionStorage.setItem('user_id',this.userProfile.u_id);
       this.img=user.img;
+
+      this.api.getDataById('account/getUser',this.userProfile.u_id)
+      .subscribe(res => {
+          localStorage.setItem('userData',JSON.stringify(res))
+          this.authen.editdata(res);
+          sessionStorage.setItem('user_id',this.userProfile.u_id);
+        });
+
+  
    });
     
   }
@@ -116,10 +138,21 @@ export class AppComponent {
           this.userProfile = data.data;
           this.img=data.img;
           this.user.role = this.userProfile.u_position;
+        
+          this.api.getDataById('account/getUser',this.userProfile.u_id)
+      .subscribe(res => {
+          localStorage.setItem('userData',JSON.stringify(res))
+          this.authen.editdata(res);
           sessionStorage.setItem('user_id',this.userProfile.u_id);
+
+
+        });
+
+
+
           //console.log(this.userProfile);
    
-          this.navCtrl.navigateRoot('/backtoshop');
+          this.navCtrl.navigateRoot('/home');
           
         }else{
    
@@ -178,6 +211,10 @@ export class AppComponent {
 
     this.router.navigate(['account/'+id]);
   }
+
+
+
+
 
 
 }
