@@ -1,7 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit , ViewChild } from '@angular/core';
 import { ApiService } from '../../services/api.service';
 import { Router,ActivatedRoute } from '@angular/router';
-import { LoadingController } from '@ionic/angular';
+import { LoadingController,IonInfiniteScroll,MenuController  } from '@ionic/angular';
 import { PhotoViewer } from '@ionic-native/photo-viewer/ngx';
 
 @Component({
@@ -10,43 +10,49 @@ import { PhotoViewer } from '@ionic-native/photo-viewer/ngx';
   styleUrls: ['./stocklist.page.scss'],
 })
 export class StocklistPage implements OnInit {
- items;
+  @ViewChild(IonInfiniteScroll) infiniteScroll: IonInfiniteScroll;
+
+ items =[];
+ page=1;
+
   constructor(
     private router: Router,
     private route: ActivatedRoute,
     private api:ApiService,
     public loadingController: LoadingController,
-    private photoViewer: PhotoViewer
-   ) { }
+    private photoViewer: PhotoViewer,
+    public menuCtrl: MenuController,
+   ) { 
+
+   }
 
   ngOnInit() {
   }
 
   ionViewWillEnter() {
     this.getstock()
+    this.menuCtrl.enable(true);
   }
 
   doRefresh(event) {
-    //console.log('Begin async operation');
     setTimeout(() => {
-     // console.log('Async operation has ended');
+     this.page=1;
      this.getstock()
-     event.target.complete();
-    }, 2000);
+      event.target.complete();
+     }, 2000);
   }
+
 
   async getstock() {
     const loading = await this.loadingController.create({
       message: 'Loading...'
     });
     await loading.present();
-    await this.api.getData('stock/stocklist')
+    await this.api.getData(`stock/stocklist?page=${this.page}`)
       .subscribe(res => {
-       // console.log(res);
         this.items = res;
         loading.dismiss();
       }, err => {
-        //console.log(err);
         this.api.showMiddlewareAlert(err)
         loading.dismiss();
       });
@@ -56,10 +62,7 @@ export class StocklistPage implements OnInit {
     this.photoViewer.show(img);
   }
 
-  
-
-
- 
+   
   async getItems(ev) {
   
     var val = ev.target.value;
@@ -87,6 +90,36 @@ export class StocklistPage implements OnInit {
     this.router.navigate(['stockdetail/'+id+'/'+name]);
 
   }
+
+
+
+  async loadData(event?) {
+
+    this.page++;
+
+    await this.api.getData(`stock/stocklist?page=${this.page}`)
+      .subscribe(res => {
+             
+        this.items = this.items.concat(res)
+
+        event.target.complete();
+
+        // if (res.length < 3) {
+        //   event.target.disabled = true;
+        // }
+
+      }, err => {
+ 
+        this.api.showMiddlewareAlert(err)
+        
+      });
+
+      //console.log(event);
+
+
+  }
+
+
 
 
 }

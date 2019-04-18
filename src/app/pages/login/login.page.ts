@@ -64,7 +64,7 @@ export class LoginPage implements OnInit {
 
           this.events.publish('user:changed', res);
 
-          this.router.navigate(['home']);
+          this.router.navigate(['stocklist']);
           
           //this.api.presentToast('เข้าสู่ระบบสำเร็จ');
         }else{

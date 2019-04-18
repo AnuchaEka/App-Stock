@@ -63,8 +63,13 @@
     <div  *ngIf="items?.length == 0" class="itemnone">
       <p style="color:red;">ไม่มีสินค้า</p>
     </div>
- 
- 
-   
+
+    <ion-infinite-scroll threshold="100px" (ionInfinite)="loadData($event)">
+      <ion-infinite-scroll-content
+        loadingSpinner="bubbles"
+        loadingText="Loading more data...">
+      </ion-infinite-scroll-content>
+    </ion-infinite-scroll>
+    
   </ion-list>
 </ion-content>

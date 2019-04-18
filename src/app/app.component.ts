@@ -22,12 +22,19 @@ export class AppComponent {
   version = '1.0.4'
 
   public appPages = [
+    // {
+    //   title: 'หน้าหลัก',
+    //   url: '/home',
+    //   icon: 'home',
+    //   direct: 'root',
+    // }  ,
     {
-      title: 'หน้าหลัก',
-      url: '/home',
-      icon: 'home',
-      direct: 'root',
+      title: 'สต๊อกสินค้าทั้งหมด',
+      url: '/stocklist',
+      icon: 'logo-buffer',
+      direct: 'forward',
     },
+    
     {
       title: 'เบิกสินค้าส่งให้ลูกค้า',
       url: '/cutstockshop',
@@ -50,13 +57,7 @@ export class AppComponent {
       direct: 'forward',
     }
 
-    ,
-    {
-      title: 'สต๊อกสินค้าทั้งหมด',
-      url: '/stocklist',
-      icon: 'logo-buffer',
-      direct: 'forward',
-    }
+  
 
     ,
     {
@@ -75,6 +76,57 @@ export class AppComponent {
     }
   ];
 
+  public appPagesShop = [
+
+    {
+      title: 'สต๊อกสินค้าทั้งหมด',
+      url: '/stocklist',
+      icon: 'logo-buffer',
+      direct: 'forward',
+    },
+    
+    {
+      title: 'เบิกสินค้าส่งให้ลูกค้า',
+      url: '/cutstockshop',
+      icon: 'arrow-round-up',
+      direct: 'forward',
+    }
+    ,
+    {
+      title: 'จองสินค้า',
+      url: '/list',
+      icon: 'cart',
+      direct: 'forward',
+    }
+    ,
+
+    {
+      title: 'คืนสินค้าจากลูกค้า',
+      url: '/backtoshop',
+      icon: 'swap',
+      direct: 'forward',
+    }
+
+  
+
+    ,
+    {
+      title: 'เบิกสินค้าจากโกดังใหญ่',
+      url: '/producttostock',
+      icon: 'archive',
+      direct: 'forward',
+    }
+
+    ,
+    {
+      title: 'ตรวจสอบสินค้าก่อนเข้าโกดังเล็ก',
+      url: '/confrimstock',
+      icon: 'checkbox-outline',
+      direct: 'forward',
+    }
+  ];
+
+
   user: any = {role: 'ผู้ดูแลระบบ'};
   selectedPath = '';
 
@@ -92,7 +144,7 @@ export class AppComponent {
     
   ) {
     this.initializeApp();
-    //console.log(this.user.role);
+    console.log(this.user.role);
 
     this.router.events.subscribe((event: RouterEvent) => {
       
@@ -152,7 +204,7 @@ export class AppComponent {
 
           //console.log(this.userProfile);
    
-          this.navCtrl.navigateRoot('/home');
+          this.navCtrl.navigateRoot('/stocklist');
           
         }else{
    

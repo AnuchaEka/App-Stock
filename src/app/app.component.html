@@ -39,8 +39,9 @@
               <ion-list-header color="dark">
                 <ion-label>เมนู</ion-label>
               </ion-list-header>
-    
-              <ion-menu-toggle auto-hide="false" *ngFor="let p of appPages">
+              
+              <div *ngIf="user.role == 'ผู้ดูแลระบบ'">
+              <ion-menu-toggle auto-hide="false"  *ngFor="let p of appPages" >
                 <ion-item [routerLink]="[p.url]" routerDirection="root" [class.active-item]="selectedPath.startsWith(p.url)" color="primary" class="menus">
                   <ion-icon slot="start" [name]="p.icon" color="light" item-start></ion-icon>
                   <ion-label>
@@ -48,6 +49,22 @@
                   </ion-label>
                 </ion-item>
               </ion-menu-toggle>
+            </div>
+
+            <div *ngIf="user.role == 'พนักงานหน้าร้าน'">
+              <ion-menu-toggle auto-hide="false"  *ngFor="let p of appPagesShop" >
+                <ion-item [routerLink]="[p.url]" routerDirection="root" [class.active-item]="selectedPath.startsWith(p.url)" color="primary" class="menus">
+                  <ion-icon slot="start" [name]="p.icon" color="light" item-start></ion-icon>
+                  <ion-label>
+                    {{p.title}}
+                  </ion-label>
+                </ion-item>
+              </ion-menu-toggle>
+            </div>
+
+
+            
+
     
               <!-- <div *ngIf="user.role == 'ผู้ดูแลระบบ'">
               <ion-list-header color="dark">
