@@ -56,9 +56,6 @@ export class AppComponent {
       icon: 'swap',
       direct: 'forward',
     }
-
-  
-
     ,
     {
       title: 'เบิกสินค้าจากโกดังใหญ่',
@@ -125,6 +122,57 @@ export class AppComponent {
       direct: 'forward',
     }
   ];
+
+  public appPagesStock = [
+
+    {
+      title: 'สต๊อกสินค้าทั้งหมด',
+      url: '/stocklist',
+      icon: 'logo-buffer',
+      direct: 'forward',
+    },
+    
+    {
+      title: 'เบิกสินค้าส่งให้ลูกค้า',
+      url: '/cutstockshop',
+      icon: 'arrow-round-up',
+      direct: 'forward',
+    }
+    ,
+    {
+      title: 'จองสินค้า',
+      url: '/list',
+      icon: 'cart',
+      direct: 'forward',
+    }
+    ,
+
+    {
+      title: 'คืนสินค้าจากลูกค้า',
+      url: '/backtoshop',
+      icon: 'swap',
+      direct: 'forward',
+    }
+
+  
+
+    ,
+    {
+      title: 'เบิกสินค้าจากโกดังใหญ่',
+      url: '/producttostock',
+      icon: 'archive',
+      direct: 'forward',
+    }
+
+    ,
+    {
+      title: 'ตรวจสอบสินค้าก่อนเข้าโกดังเล็ก',
+      url: '/confrimstock',
+      icon: 'checkbox-outline',
+      direct: 'forward',
+    }
+  ];
+
 
 
   user: any = {role: 'ผู้ดูแลระบบ'};

@@ -56,6 +56,7 @@ export class BacktoshopPage implements OnInit {
         loading.dismiss();
       }, err => {
         //console.log(err);
+        this.api.showMiddlewareAlert(err)
         loading.dismiss();
       });
   }

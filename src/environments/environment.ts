@@ -6,7 +6,7 @@ export const environment = {
   production: false
 };
 
-export const SERVER_URL = 'http://phpstack-201718-795798.cloudwaysapps.com/api_app/';
+export const SERVER_URL = 'https://phpstack-201718-795798.cloudwaysapps.com/api_app/';
 
 /*
  * For easier debugging in development mode, you can import the following file

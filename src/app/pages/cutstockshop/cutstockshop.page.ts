@@ -50,7 +50,7 @@ export class CutstockshopPage implements OnInit {
         this.resdata = res;
         loading.dismiss();
       }, err => {
-        //console.log(err);
+        this.api.showMiddlewareAlert(err)
         loading.dismiss();
       });
   }
