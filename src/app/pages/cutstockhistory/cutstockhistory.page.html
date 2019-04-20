@@ -35,7 +35,7 @@
  </ion-row>
  
  <div class="list-product">
-   <ion-row style="border-bottom: 1px solid #ddd;" *ngFor="let item of resdata"> 
+   <ion-row style="border-bottom: 1px solid #ddd;" *ngFor="let item of resdata" (click)="getlits(item.pid)"> 
        <ion-col col>
            <ion-thumbnail>
                <img src="{{item.img}}" width="65px">

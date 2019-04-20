@@ -20,6 +20,8 @@ const routes: Routes = [
   { path: 'cutstockhistory/:id/:name', loadChildren: './pages/cutstockhistory/cutstockhistory.module#CutstockhistoryPageModule' },
   { path: 'backtoshop', loadChildren: './pages/backtoshop/backtoshop.module#BacktoshopPageModule' },
   { path: 'backtostock/:id/:name', loadChildren: './pages/backtostock/backtostock.module#BacktostockPageModule' },
+  { path: 'cutstockhistorylist/:id/:name/:pid', loadChildren: './pages/cutstockhistorylist/cutstockhistorylist.module#CutstockhistorylistPageModule' },
+
 
 
 

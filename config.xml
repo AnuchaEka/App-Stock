@@ -1,9 +1,9 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget id="com.projectjaidee.StockFasicare" version="1.0.4" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+<widget id="com.projectjaidee.StockFasicare" version="2.0.0" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
     <name>Stock Fasicare</name>
     <description>Stock Fasicare Online</description>
     <author email="anucha.aeka@gmail.com" href="http://projectjaidee.com/">Projectjaidee Team</author>
-    <content original-src="index.html" src="http://192.168.1.147:8100" />
+    <content src="index.html" />
     <access origin="*" />
     <allow-intent href="http://*/*" />
     <allow-intent href="https://*/*" />

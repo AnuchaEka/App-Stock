@@ -19,7 +19,7 @@ export class AppComponent {
   img:any;
   res;
   userProfile;
-  version = '1.0.4'
+  version = '2.0.0'
 
   public appPages = [
     // {
@@ -81,7 +81,6 @@ export class AppComponent {
       icon: 'logo-buffer',
       direct: 'forward',
     },
-    
     {
       title: 'เบิกสินค้าส่งให้ลูกค้า',
       url: '/cutstockshop',
@@ -103,20 +102,9 @@ export class AppComponent {
       icon: 'swap',
       direct: 'forward',
     }
-
-  
-
     ,
     {
-      title: 'เบิกสินค้าจากโกดังใหญ่',
-      url: '/producttostock',
-      icon: 'archive',
-      direct: 'forward',
-    }
-
-    ,
-    {
-      title: 'ตรวจสอบสินค้าก่อนเข้าโกดังเล็ก',
+      title: 'ตรวจสอบสินค้าเข้าบ้านยาดี',
       url: '/confrimstock',
       icon: 'checkbox-outline',
       direct: 'forward',
@@ -140,22 +128,18 @@ export class AppComponent {
     }
     ,
     {
-      title: 'จองสินค้า',
-      url: '/list',
-      icon: 'cart',
-      direct: 'forward',
-    }
-    ,
-
-    {
       title: 'คืนสินค้าจากลูกค้า',
       url: '/backtoshop',
       icon: 'swap',
       direct: 'forward',
     }
-
-  
-
+    ,
+    {
+      title: 'เบิกสินค้าให้บ้านยาดี',
+      url: '/producttobanyadee',
+      icon: 'archive',
+      direct: 'forward',
+    }
     ,
     {
       title: 'เบิกสินค้าจากโกดังใหญ่',
@@ -252,11 +236,11 @@ export class AppComponent {
 
           //console.log(this.userProfile);
    
-          this.navCtrl.navigateRoot('/stocklist');
+         // this.navCtrl.navigateRoot('/stocklist');
           
         }else{
    
-          this.navCtrl.navigateRoot('/login');
+          //this.navCtrl.navigateRoot('/login');
         }
 
       });
