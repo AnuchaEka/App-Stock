@@ -240,7 +240,7 @@ export class AppComponent {
           
         }else{
    
-          //this.navCtrl.navigateRoot('/login');
+        //  this.navCtrl.navigateRoot('/login');
         }
 
       });

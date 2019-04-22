@@ -22,6 +22,8 @@ import { PhotoViewer } from '@ionic-native/photo-viewer/ngx';
 import { StocklostPage } from './pages/stocklost/stocklost.page';
 import { BarcodeScanner } from '@ionic-native/barcode-scanner/ngx';
 
+//import {DatePipe} from '@angular/common';
+
 @NgModule({
   declarations: [AppComponent,StocklostPage],
   entryComponents: [StocklostPage],
@@ -45,7 +47,8 @@ import { BarcodeScanner } from '@ionic-native/barcode-scanner/ngx';
     WebView,
     FilePath,
     PhotoViewer,
-    BarcodeScanner
+    BarcodeScanner,
+    //DatePipe
   ],
   bootstrap: [AppComponent]
 })

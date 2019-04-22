@@ -29,7 +29,7 @@
   
   <ion-list >
     
-    <div *ngIf="items?.length != 0">
+    <div *ngIf="items?.length != 0 || items !=null">
     <ion-item  *ngFor="let item of items"  >
       <div item-start>
         <img src="{{item.img}}"   class="img" (click)="zoom(item.img)">
@@ -60,7 +60,7 @@
       
     </ion-item>
   </div>
-    <div  *ngIf="items?.length == 0" class="itemnone">
+    <div  *ngIf="items?.length == 0 || items==null" class="itemnone">
       <p style="color:red;">ไม่มีสินค้า</p>
     </div>
 

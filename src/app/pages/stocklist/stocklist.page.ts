@@ -36,8 +36,7 @@ export class StocklistPage implements OnInit {
 
   doRefresh(event) {
     setTimeout(() => {
-     this.page=1;
-     this.getstock()
+      this.getstock()
       event.target.complete();
      }, 2000);
   }
@@ -47,6 +46,8 @@ export class StocklistPage implements OnInit {
     const loading = await this.loadingController.create({
       message: 'Loading...'
     });
+    this.page=1;
+
     await loading.present();
     await this.api.getData(`stock/stocklist?page=${this.page}`)
       .subscribe(res => {
@@ -101,13 +102,8 @@ export class StocklistPage implements OnInit {
       .subscribe(res => {
              
         this.items = this.items.concat(res)
-
         event.target.complete();
-
-        // if (res.length < 3) {
-        //   event.target.disabled = true;
-        // }
-
+ 
       }, err => {
  
         this.api.showMiddlewareAlert(err)

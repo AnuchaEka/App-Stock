@@ -1,7 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit , ViewChild } from '@angular/core';
 import { ApiService } from '../../services/api.service';
-import { LoadingController} from '@ionic/angular';
 import { Router,ActivatedRoute } from '@angular/router';
+import { LoadingController,IonInfiniteScroll } from '@ionic/angular';
+
+
 
 @Component({
   selector: 'app-cutstockhistorylist',
@@ -9,38 +11,67 @@ import { Router,ActivatedRoute } from '@angular/router';
   styleUrls: ['./cutstockhistorylist.page.scss'],
 })
 export class CutstockhistorylistPage implements OnInit {
-
+  @ViewChild(IonInfiniteScroll) infiniteScroll: IonInfiniteScroll;
   name;
-  id
-  pid;
-  resdata=[];
-  proname;
+ id
+ pid;
+ items =[];
+ proname;
+ page=1;
+ myDate;
 
   constructor(
     private router: Router,
     private route: ActivatedRoute,
     private api:ApiService,
-    public loadingCtrl: LoadingController,
-  ) { 
+    public loadingController: LoadingController,
+    
+   
+   ) { 
     this.name = this.route.snapshot.paramMap.get('name');
     this.id = this.route.snapshot.paramMap.get('id');
     this.pid = this.route.snapshot.paramMap.get('pid');
+ 
+   }
+
+
+
+  customPickerOptionFrom = {
+    mode: "ios",
+    buttons: [{
+      text: 'ลบ',
+      handler: () =>{
+       // console.log("OnClearDatetime")
+        this.myDate='';
+        this.getData();
+      }
+        
+    },{
+      text: 'เลือก',
+      handler: (event) => {
+       // console.log('Clicked Save!')
+        //console.log(event);
+        this.myDate=`${event.year.text}-${event.month.text}-${event.day.text}`;
+        //console.log(this.myDate);
+        this.getItems(this.myDate);  
+      }
+    }]
+  }
+
+  ngOnInit() {
+  }
+
+  ionViewWillEnter() {
+    this.getData();
+    this.getProd();
   }
 
   doRefresh(event) {
-    //console.log('Begin async operation');
     setTimeout(() => {
-     // console.log('Async operation has ended');
-     this.getProd()
-     this.getData();
-     event.target.complete();
-    }, 2000);
-  }
-
-
-  ngOnInit() {
-    this.getProd();
-    this.getData();
+      this.getData();
+      this.getProd();
+      event.target.complete();
+     }, 2000);
   }
 
   async getProd(){
@@ -60,27 +91,75 @@ export class CutstockhistorylistPage implements OnInit {
   }
 
 
+
   async getData() {
-    
-    const loading = await this.loadingCtrl.create({
-      message: 'Please wait...',
-      spinner: 'crescent',
-      duration: 2000
+    const loading = await this.loadingController.create({
+      message: 'Loading...'
     });
+    this.page=1;
 
     await loading.present();
-    await this.api.getData('cutstock/viewstockallProd/'+this.id+'/'+this.pid)
+    await this.api.getData(`cutstock/viewstockallProd/${this.id}/${+this.pid}?page=${this.page}`)
       .subscribe(res => {
-        //console.log(res);
-        this.resdata = res;
+        this.items = res;
         loading.dismiss();
       }, err => {
-        //console.log(err);
+        this.api.showMiddlewareAlert(err)
         loading.dismiss();
       });
   }
 
+
   
+
+   
+  async getItems(date) {
   
+    const loading = await this.loadingController.create({
+      message: 'Loading...'
+    });
+    this.page=1;
+
+    await loading.present();
+    await this.api.getData(`cutstock/viewstockallProd/${this.id}/${+this.pid}?page=${this.page}&date=${date}`)
+      .subscribe(res => {
+        this.items = res;
+        loading.dismiss();
+      }, err => {
+        this.api.showMiddlewareAlert(err)
+        loading.dismiss();
+      });
+
+
+  }
+
+ 
+
+
+
+  async loadData(event?) {
+
+    this.page++;
+
+    await this.api.getData(`cutstock/viewstockallProd/${this.id}/${+this.pid}?page=${this.page}`)
+      .subscribe(res => {
+             
+        this.items = this.items.concat(res)
+        event.target.complete();
+        console.log(this.page);
+ 
+      }, err => {
+ 
+        this.api.showMiddlewareAlert(err)
+        
+      });
+
+      //console.log(event);
+
+
+  }
+
+
+
 
 }

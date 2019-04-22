@@ -49,7 +49,7 @@ export class CutstockhistoryPage implements OnInit {
     await loading.present();
     await this.api.getDataById('cutstock/viewstockall',this.id)
       .subscribe(res => {
-        console.log(res);
+        //console.log(res);
         this.resdata = res;
         loading.dismiss();
       }, err => {
