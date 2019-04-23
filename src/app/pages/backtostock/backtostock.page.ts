@@ -108,4 +108,8 @@ export class BacktostockPage implements OnInit {
         loading.dismiss();
       });
   }
+
+  getPage(){
+    this.router.navigate(['backstockhistory/'+this.id+'/'+this.name]);
+  }
 }

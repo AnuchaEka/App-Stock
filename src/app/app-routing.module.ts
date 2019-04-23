@@ -21,6 +21,9 @@ const routes: Routes = [
   { path: 'backtoshop', loadChildren: './pages/backtoshop/backtoshop.module#BacktoshopPageModule' },
   { path: 'backtostock/:id/:name', loadChildren: './pages/backtostock/backtostock.module#BacktostockPageModule' },
   { path: 'cutstockhistorylist/:id/:name/:pid', loadChildren: './pages/cutstockhistorylist/cutstockhistorylist.module#CutstockhistorylistPageModule' },
+  { path: 'backstockhistory/:id/:name', loadChildren: './pages/backstockhistory/backstockhistory.module#BackstockhistoryPageModule' },
+  { path: 'backstockhistorylist/:id/:name/:pid', loadChildren: './pages/backstockhistorylist/backstockhistorylist.module#BackstockhistorylistPageModule' },
+
 
 
 

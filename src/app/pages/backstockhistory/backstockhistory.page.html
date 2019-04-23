@@ -1,0 +1,56 @@
+<ion-header>
+  <ion-toolbar color="primary">
+      <ion-buttons slot="start">
+          <ion-back-button id="backButton" defaultHref="/backtostock/{{id}}/{{name}}" text=""></ion-back-button>
+        </ion-buttons>
+    <ion-title>
+        <ion-text color="light">
+          <ion-text color="light" class="fw700">ประวัติคืนสินค้า {{name}}</ion-text>
+        </ion-text>
+    </ion-title>
+
+  </ion-toolbar>
+
+</ion-header>
+
+<ion-content>
+
+  
+<ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+  <ion-refresher-content></ion-refresher-content>
+</ion-refresher>
+
+
+<ion-row style="border-bottom: 1px solid #a1a1a1;background-color:#085dce;color: #fff">
+  <ion-col col>
+       <ion-label >รูปสินค้า</ion-label>
+  </ion-col>
+ <ion-col col>
+ <ion-label >ชื่อสินค้า</ion-label>
+</ion-col>
+<ion-col col>
+ <ion-label >จำนวนสินค้า</ion-label>
+</ion-col>
+ 
+</ion-row>
+
+<div class="list-product">
+ <ion-row style="border-bottom: 1px solid #ddd;" *ngFor="let item of resdata" (click)="getlits(item.pid)"> 
+     <ion-col col>
+         <ion-thumbnail>
+             <img src="{{item.img}}" width="65px">
+           </ion-thumbnail>
+   </ion-col>
+     <ion-col col>
+     <ion-label >{{item.name}}</ion-label>
+   </ion-col>
+   <ion-col col>
+     <ion-label >{{item.qty}}</ion-label>
+   </ion-col>
+     
+ </ion-row>
+</div>
+
+
+</ion-content>
+ 

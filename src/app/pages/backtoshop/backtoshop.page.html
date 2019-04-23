@@ -27,17 +27,20 @@
               <img src="{{item.img}}"   class="img" >
             </div>
            
-         
+            <div >
               <ion-label>
                 {{ item.name }}
              </ion-label> 
               
          
-                <ion-badge   slot="end">คืนทั้งหมด : {{item.countbk}}</ion-badge>&nbsp; 
+                <!-- <ion-badge   slot="end">คืนทั้งหมด : {{item.countbk}}</ion-badge>&nbsp;  -->
                 <!-- <ion-badge >ส่งวันนี้ : {{item.counttoday}}</ion-badge> -->
-            
-        
-        
+                <p>
+                    <ion-badge color="secondary">คืนทั้งหมด : {{item.countbk}}</ion-badge>&nbsp;
+                    <ion-badge >ส่งวันนี้ : {{item.countbktoday}}</ion-badge>
+                 </p>
+            </div>
+                 
          
             
           </ion-item>
