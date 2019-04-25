@@ -5,7 +5,6 @@ import { LoadingController} from '@ionic/angular';
 
 import { BarcodeScanner, BarcodeScannerOptions } from '@ionic-native/barcode-scanner/ngx';
 
-
 @Component({
   selector: 'app-cutstocktoshop',
   templateUrl: './cutstocktoshop.page.html',
@@ -15,6 +14,8 @@ export class CutstocktoshopPage implements OnInit {
   name;
   id
 
+
+ 
   options:BarcodeScannerOptions;
   encodText:string='';
   encodedData:any={};

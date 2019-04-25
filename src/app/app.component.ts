@@ -29,46 +29,45 @@ export class AppComponent {
     //   direct: 'root',
     // }  ,
     {
-      title: 'สต๊อกสินค้าทั้งหมด',
+      title: 'สินค้าทั้งหมด',
       url: '/stocklist',
-      icon: 'logo-buffer',
+      icon: 'cubes',
       direct: 'forward',
     },
     
     {
       title: 'เบิกสินค้าส่งให้ลูกค้า',
       url: '/cutstockshop',
-      icon: 'arrow-round-up',
+      icon: 'clipboard-list',
       direct: 'forward',
     }
     ,
-    // {
-    //   title: 'จองสินค้า',
-    //   url: '/list',
-    //   icon: 'cart',
-    //   direct: 'forward',
-    // }
-    // ,
-
     {
-      title: 'คืนสินค้าจากลูกค้า',
+      title: 'เบิกสินค้าให้บ้านยาดี',
+      url: '/producttobanyadee',
+      icon: 'warehouse',
+      direct: 'forward',
+    }
+    ,
+    {
+      title: 'รับสินค้าคืนจากลูกค้า',
       url: '/backtoshop',
-      icon: 'swap',
+      icon: 'undo-alt',
       direct: 'forward',
     }
     ,
     {
       title: 'เบิกสินค้าจากโกดังใหญ่',
       url: '/producttostock',
-      icon: 'archive',
+      icon: 'warehouse',
       direct: 'forward',
     }
 
     ,
     {
-      title: 'ตรวจสอบสินค้าก่อนเข้าโกดังเล็ก',
+      title: 'รับสินค้าเข้าโกดังเล็ก',
       url: '/confrimstock',
-      icon: 'checkbox-outline',
+      icon: 'clipboard-check',
       direct: 'forward',
     }
   ];
@@ -76,15 +75,15 @@ export class AppComponent {
   public appPagesShop = [
 
     {
-      title: 'สต๊อกสินค้าทั้งหมด',
+      title: 'สินค้าทั้งหมด',
       url: '/stocklist',
-      icon: 'logo-buffer',
+      icon: 'cubes',
       direct: 'forward',
     },
     {
-      title: 'เบิกสินค้าส่งให้ลูกค้า',
+      title: 'ขายสินค้าให้ลูกค้า',
       url: '/cutstockshop',
-      icon: 'arrow-round-up',
+      icon: 'clipboard-list',
       direct: 'forward',
     }
     ,
@@ -97,16 +96,16 @@ export class AppComponent {
     ,
 
     {
-      title: 'คืนสินค้าจากลูกค้า',
+      title: 'รับสินค้าคืนจากลูกค้า',
       url: '/backtoshop',
-      icon: 'swap',
+      icon: 'undo-alt',
       direct: 'forward',
     }
     ,
     {
-      title: 'ตรวจสอบสินค้าเข้าบ้านยาดี',
+      title: 'รับสินค้าเข้าร้าน                                                                                                                                                                                                                                        ',
       url: '/confrimstock',
-      icon: 'checkbox-outline',
+      icon: 'clipboard-check',
       direct: 'forward',
     }
   ];
@@ -114,45 +113,45 @@ export class AppComponent {
   public appPagesStock = [
 
     {
-      title: 'สต๊อกสินค้าทั้งหมด',
+      title: 'สินค้าทั้งหมด',
       url: '/stocklist',
-      icon: 'logo-buffer',
+      icon: "cubes",
       direct: 'forward',
     },
     
     {
       title: 'เบิกสินค้าส่งให้ลูกค้า',
       url: '/cutstockshop',
-      icon: 'arrow-round-up',
+      icon: 'clipboard-list',
       direct: 'forward',
     }
     ,
     {
-      title: 'คืนสินค้าจากลูกค้า',
+      title: 'รับสินค้าคืนจากลูกค้า',
       url: '/backtoshop',
-      icon: 'swap',
+      icon: 'undo-alt',
       direct: 'forward',
     }
     ,
     {
       title: 'เบิกสินค้าให้บ้านยาดี',
       url: '/producttobanyadee',
-      icon: 'archive',
+      icon: 'store-alt',
       direct: 'forward',
     }
     ,
     {
       title: 'เบิกสินค้าจากโกดังใหญ่',
       url: '/producttostock',
-      icon: 'archive',
+      icon: 'warehouse',
       direct: 'forward',
     }
 
     ,
     {
-      title: 'ตรวจสอบสินค้าก่อนเข้าโกดังเล็ก',
+      title: 'รับสินค้าเข้าโกดังเล็ก',
       url: '/confrimstock',
-      icon: 'checkbox-outline',
+      icon: 'clipboard-check',
       direct: 'forward',
     }
   ];
@@ -236,11 +235,11 @@ export class AppComponent {
 
           //console.log(this.userProfile);
    
-         // this.navCtrl.navigateRoot('/stocklist');
+          //this.navCtrl.navigateRoot('/stocklist');
           
         }else{
    
-         // this.navCtrl.navigateRoot('/login');
+          //this.navCtrl.navigateRoot('/login');
          
         }
 

@@ -22,7 +22,13 @@ import { PhotoViewer } from '@ionic-native/photo-viewer/ngx';
 import { StocklostPage } from './pages/stocklost/stocklost.page';
 import { BarcodeScanner } from '@ionic-native/barcode-scanner/ngx';
 
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { library } from '@fortawesome/fontawesome-svg-core';
+import { fas } from '@fortawesome/free-solid-svg-icons';
+import { far } from '@fortawesome/free-regular-svg-icons';
+import { fab } from '@fortawesome/free-brands-svg-icons';
 //import {DatePipe} from '@angular/common';
+library.add(fas, far,fab);
 
 @NgModule({
   declarations: [AppComponent,StocklostPage],
@@ -35,7 +41,8 @@ import { BarcodeScanner } from '@ionic-native/barcode-scanner/ngx';
       name: 'stock-app',
       driverOrder: ['indexeddb', 'sqlite', 'websql']
     }),
-    HttpClientModule
+    HttpClientModule,
+    FontAwesomeModule
      
   ],
   providers: [

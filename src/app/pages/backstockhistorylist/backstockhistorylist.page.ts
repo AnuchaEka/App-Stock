@@ -145,7 +145,7 @@ export class BackstockhistorylistPage implements OnInit {
              
         this.items = this.items.concat(res)
         event.target.complete();
-        console.log(this.page);
+        //console.log(this.page);
  
       }, err => {
  

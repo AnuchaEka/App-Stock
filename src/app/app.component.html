@@ -16,15 +16,18 @@
                   <ion-menu-toggle class="mto" auto-hide="false">
                     <a class="text08" tappable (click)="goToEditProgile(userProfile.u_id)">
                       <ion-text color="light">
-                        <ion-icon name="contact"></ion-icon>
+                        <!-- <ion-icon name="contact"></ion-icon> -->
+                        <fa-icon icon="user-circle" size="lg"></fa-icon>
                          โปรไฟล์
                       </ion-text>
                     </a>
                      <ion-text color="primary"> | </ion-text> 
                     <a class="text08" tappable (click)="logout()">
                       <ion-text color="light">
-                        <ion-icon name="log-out"></ion-icon>
-                        ออกจากระบบ
+                        <!-- <ion-icon name="log-out"></ion-icon>
+                        ออกจากระบบ -->
+                       <fa-icon icon="power-off" size="lg"></fa-icon>
+                       ออกจากระบบ
                       </ion-text>
                     </a>
                   </ion-menu-toggle>
@@ -36,25 +39,29 @@
     
           <ion-content class="bg-profile">
             <ion-list>
-              <ion-list-header color="dark">
-                <ion-label>เมนู</ion-label>
-              </ion-list-header>
-              
               <div *ngIf="user.role == 'ผู้ดูแลระบบ'">
+              <!-- <ion-list-header color="dark">
+                <ion-label>เมนู</ion-label>
+              </ion-list-header> -->
+              
+             
               <ion-menu-toggle auto-hide="false"  *ngFor="let p of appPages" >
                 <ion-item [routerLink]="[p.url]" routerDirection="root" [class.active-item]="selectedPath.startsWith(p.url)" color="primary" class="menus">
-                  <ion-icon slot="start" [name]="p.icon" color="light" item-start></ion-icon>
+                  <!-- <ion-icon slot="start" [name]="p.icon" color="light" item-start></ion-icon> -->
+                  <fa-icon [icon]="p.icon" size="lg" slot="start"></fa-icon>
                   <ion-label>
                     {{p.title}}
                   </ion-label>
                 </ion-item>
               </ion-menu-toggle>
+
             </div>
 
             <div *ngIf="user.role == 'พนักงานหน้าร้าน'">
               <ion-menu-toggle auto-hide="false"  *ngFor="let p of appPagesShop" >
                 <ion-item [routerLink]="[p.url]" routerDirection="root" [class.active-item]="selectedPath.startsWith(p.url)" color="primary" class="menus">
-                  <ion-icon slot="start" [name]="p.icon" color="light" item-start></ion-icon>
+                  <!-- <ion-icon slot="start" [name]="p.icon" color="light" item-start></ion-icon> -->
+                  <fa-icon [icon]="p.icon" size="lg" slot="start"></fa-icon>
                   <ion-label>
                     {{p.title}}
                   </ion-label>
@@ -65,7 +72,8 @@
             <div *ngIf="user.role == 'พนักงานสต๊อก'">
               <ion-menu-toggle auto-hide="false"  *ngFor="let p of appPagesStock" >
                 <ion-item [routerLink]="[p.url]" routerDirection="root" [class.active-item]="selectedPath.startsWith(p.url)" color="primary" class="menus">
-                  <ion-icon slot="start" [name]="p.icon" color="light" item-start></ion-icon>
+                  <!-- <ion-icon slot="start" [name]="p.icon" color="light" item-start></ion-icon> -->
+                  <fa-icon [icon]="p.icon" size="lg" slot="start"></fa-icon>
                   <ion-label>
                     {{p.title}}
                   </ion-label>
