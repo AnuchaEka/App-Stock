@@ -39,10 +39,11 @@
     
           <ion-content class="bg-profile">
             <ion-list>
-              <div *ngIf="user.role == 'ผู้ดูแลระบบ'">
-              <!-- <ion-list-header color="dark">
-                <ion-label>เมนู</ion-label>
-              </ion-list-header> -->
+               
+              <div >  <!-- *ngIf="user.role == 'ผู้ดูแลระบบ'" -->
+              <ion-list-header color="dark">
+                <ion-label>ผู้ดูแลระบบ</ion-label>
+              </ion-list-header>
               
              
               <ion-menu-toggle auto-hide="false"  *ngFor="let p of appPages" >
@@ -56,8 +57,11 @@
               </ion-menu-toggle>
 
             </div>
-
-            <div *ngIf="user.role == 'พนักงานหน้าร้าน'">
+            
+            <div ><!-- *ngIf="user.role == 'พนักงานหน้าร้าน'" -->
+                <ion-list-header color="dark">
+                    <ion-label>พนักงานหน้าร้าน</ion-label>
+                  </ion-list-header>
               <ion-menu-toggle auto-hide="false"  *ngFor="let p of appPagesShop" >
                 <ion-item [routerLink]="[p.url]" routerDirection="root" [class.active-item]="selectedPath.startsWith(p.url)" color="primary" class="menus">
                   <!-- <ion-icon slot="start" [name]="p.icon" color="light" item-start></ion-icon> -->
@@ -68,8 +72,11 @@
                 </ion-item>
               </ion-menu-toggle>
             </div>
-
-            <div *ngIf="user.role == 'พนักงานสต๊อก'">
+            
+            <div > <!-- *ngIf="user.role == 'พนักงานสต๊อก'" -->
+                <ion-list-header color="dark">
+                    <ion-label>พนักงานสต๊อก</ion-label>
+                  </ion-list-header>
               <ion-menu-toggle auto-hide="false"  *ngFor="let p of appPagesStock" >
                 <ion-item [routerLink]="[p.url]" routerDirection="root" [class.active-item]="selectedPath.startsWith(p.url)" color="primary" class="menus">
                   <!-- <ion-icon slot="start" [name]="p.icon" color="light" item-start></ion-icon> -->

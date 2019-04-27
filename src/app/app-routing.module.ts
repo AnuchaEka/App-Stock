@@ -22,7 +22,10 @@ const routes: Routes = [
   { path: 'backtostock/:id/:name', loadChildren: './pages/backtostock/backtostock.module#BacktostockPageModule' },
   { path: 'cutstockhistorylist/:id/:name/:pid', loadChildren: './pages/cutstockhistorylist/cutstockhistorylist.module#CutstockhistorylistPageModule' },
   { path: 'backstockhistory/:id/:name', loadChildren: './pages/backstockhistory/backstockhistory.module#BackstockhistoryPageModule' },
-  { path: 'backstockhistorylist/:id/:name/:pid', loadChildren: './pages/backstockhistorylist/backstockhistorylist.module#BackstockhistorylistPageModule' },
+  { path: 'backstockhistorylist/:id/:name/:pid', loadChildren: './pages/backstockhistorylist/backstockhistorylist.module#BackstockhistorylistPageModule' },  { path: 'producttoshop', loadChildren: './pages/producttoshop/producttoshop.module#ProducttoshopPageModule' },
+  { path: 'confrimshop', loadChildren: './pages/confrimshop/confrimshop.module#ConfrimshopPageModule' },
+  { path: 'sellproduct', loadChildren: './pages/sellproduct/sellproduct.module#SellproductPageModule' },
+
 
 
 

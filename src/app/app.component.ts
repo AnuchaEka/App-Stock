@@ -43,9 +43,9 @@ export class AppComponent {
     }
     ,
     {
-      title: 'เบิกสินค้าให้บ้านยาดี',
-      url: '/producttobanyadee',
-      icon: 'warehouse',
+      title: 'เบิกสินค้าส่งบ้านยาดี',
+      url: '/producttoshop',
+      icon: 'store-alt',
       direct: 'forward',
     }
     ,
@@ -65,7 +65,7 @@ export class AppComponent {
 
     ,
     {
-      title: 'รับสินค้าเข้าโกดังเล็ก',
+      title: 'ตรวจรับสินค้าเข้าโกดังเล็ก',
       url: '/confrimstock',
       icon: 'clipboard-check',
       direct: 'forward',
@@ -82,7 +82,7 @@ export class AppComponent {
     },
     {
       title: 'ขายสินค้าให้ลูกค้า',
-      url: '/cutstockshop',
+      url: '/sellproduct',
       icon: 'clipboard-list',
       direct: 'forward',
     }
@@ -90,7 +90,7 @@ export class AppComponent {
     {
       title: 'จองสินค้า',
       url: '/list',
-      icon: 'cart',
+      icon: 'bookmark',
       direct: 'forward',
     }
     ,
@@ -103,8 +103,8 @@ export class AppComponent {
     }
     ,
     {
-      title: 'รับสินค้าเข้าร้าน                                                                                                                                                                                                                                        ',
-      url: '/confrimstock',
+      title: 'ตรวจรับสินค้าเข้าร้าน',
+      url: '/confrimshop',
       icon: 'clipboard-check',
       direct: 'forward',
     }
@@ -120,7 +120,7 @@ export class AppComponent {
     },
     
     {
-      title: 'เบิกสินค้าส่งให้ลูกค้า',
+      title: 'เบิกสินค้าส่งบ้านยาดี',
       url: '/cutstockshop',
       icon: 'clipboard-list',
       direct: 'forward',
@@ -135,7 +135,7 @@ export class AppComponent {
     ,
     {
       title: 'เบิกสินค้าให้บ้านยาดี',
-      url: '/producttobanyadee',
+      url: '/producttoshop',
       icon: 'store-alt',
       direct: 'forward',
     }
@@ -149,7 +149,7 @@ export class AppComponent {
 
     ,
     {
-      title: 'รับสินค้าเข้าโกดังเล็ก',
+      title: 'ตรวจรับสินค้าเข้าโกดังเล็ก',
       url: '/confrimstock',
       icon: 'clipboard-check',
       direct: 'forward',
@@ -235,11 +235,11 @@ export class AppComponent {
 
           //console.log(this.userProfile);
    
-          //this.navCtrl.navigateRoot('/stocklist');
+         this.navCtrl.navigateRoot('/stocklist');
           
         }else{
    
-          //this.navCtrl.navigateRoot('/login');
+          this.navCtrl.navigateRoot('/login');
          
         }
 
