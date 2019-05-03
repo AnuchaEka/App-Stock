@@ -88,16 +88,16 @@ export class AppComponent {
     }
     ,
     {
-      title: 'จองสินค้า',
-      url: '/list',
+      title: 'จอง/เบิกสินค้า',
+      url: '/bookingproduct',
       icon: 'bookmark',
       direct: 'forward',
     }
     ,
 
     {
-      title: 'รับสินค้าคืนจากลูกค้า',
-      url: '/backtoshop',
+      title: 'รับสินค้าคืนร้าน',
+      url: '/backtoshopyadee',
       icon: 'undo-alt',
       direct: 'forward',
     }
@@ -235,11 +235,11 @@ export class AppComponent {
 
           //console.log(this.userProfile);
    
-         this.navCtrl.navigateRoot('/stocklist');
+         //this.navCtrl.navigateRoot('/stocklist');
           
         }else{
    
-          this.navCtrl.navigateRoot('/login');
+          //this.navCtrl.navigateRoot('/login');
          
         }
 

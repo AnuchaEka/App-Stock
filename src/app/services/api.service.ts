@@ -124,7 +124,10 @@ export class ApiService {
     const toast = await  this.toastCtrl.create({
       message: msg,
       color: 'dark',
-      duration: 3000
+      duration: 3000,
+      position: 'top',
+      closeButtonText: 'ตกลง',
+      showCloseButton: true
     });
     toast.present();
   }

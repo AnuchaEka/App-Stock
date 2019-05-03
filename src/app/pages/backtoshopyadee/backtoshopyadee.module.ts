@@ -5,13 +5,13 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { IonicModule } from '@ionic/angular';
 
-import { SellproductPage } from './sellproduct.page';
+import { BacktoshopyadeePage } from './backtoshopyadee.page';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 const routes: Routes = [
   {
     path: '',
-    component: SellproductPage
+    component: BacktoshopyadeePage
   }
 ];
 
@@ -23,6 +23,6 @@ const routes: Routes = [
     RouterModule.forChild(routes),
     FontAwesomeModule
   ],
-  declarations: [SellproductPage]
+  declarations: [BacktoshopyadeePage]
 })
-export class SellproductPageModule {}
+export class BacktoshopyadeePageModule {}

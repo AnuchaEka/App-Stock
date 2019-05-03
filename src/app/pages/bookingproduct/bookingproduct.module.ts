@@ -5,13 +5,12 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { IonicModule } from '@ionic/angular';
 
-import { SellproductPage } from './sellproduct.page';
-import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { BookingproductPage } from './bookingproduct.page';
 
 const routes: Routes = [
   {
     path: '',
-    component: SellproductPage
+    component: BookingproductPage
   }
 ];
 
@@ -20,9 +19,8 @@ const routes: Routes = [
     CommonModule,
     FormsModule,
     IonicModule,
-    RouterModule.forChild(routes),
-    FontAwesomeModule
+    RouterModule.forChild(routes)
   ],
-  declarations: [SellproductPage]
+  declarations: [BookingproductPage]
 })
-export class SellproductPageModule {}
+export class BookingproductPageModule {}

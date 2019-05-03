@@ -6,15 +6,15 @@ import { LoadingController} from '@ionic/angular';
 import { BarcodeScanner, BarcodeScannerOptions } from '@ionic-native/barcode-scanner/ngx';
 
 @Component({
-  selector: 'app-sellproduct',
-  templateUrl: './sellproduct.page.html',
-  styleUrls: ['./sellproduct.page.scss'],
+  selector: 'app-backtoshopyadee',
+  templateUrl: './backtoshopyadee.page.html',
+  styleUrls: ['./backtoshopyadee.page.scss'],
 })
-export class SellproductPage implements OnInit {
+export class BacktoshopyadeePage implements OnInit {
+
 
   id:any=0;
 
- 
   options:BarcodeScannerOptions;
   encodText:string='';
   encodedData:any={};
@@ -23,6 +23,7 @@ export class SellproductPage implements OnInit {
 
   userProfile;
   user;
+ 
 
   constructor(
     private router: Router,
@@ -31,7 +32,7 @@ export class SellproductPage implements OnInit {
     public loadingCtrl: LoadingController,
     public scanner:BarcodeScanner,
   ) {
-        
+ 
     this.userProfile =this.api.getStore();
     this.user = this.userProfile.data;
    }
@@ -57,9 +58,9 @@ export class SellproductPage implements OnInit {
   this.scanner.scan(this.options).then((data)=>{
     this.scannedData=data;
 
-    let userid = this.user.u_id;
+     let userid = this.user.u_id;
      
-     this.api.postData({'code':data.text,'userid':userid,'shopID':this.id},'sellproducts/sell')
+     this.api.postData({'code':data.text,'userid':userid,'shopID':this.id},'backtoshop/backshop')
     .subscribe(res => {
         //let id = res['status'];
         if(res.status==1){
@@ -95,7 +96,7 @@ export class SellproductPage implements OnInit {
     });
 
     await loading.present();
-    await this.api.getDataById('sellproducts/viewstock',this.id)
+    await this.api.getDataById('backtoshop/viewbackshop',this.id)
       .subscribe(res => {
         //console.log(res);
         this.resdata = res;
@@ -106,12 +107,7 @@ export class SellproductPage implements OnInit {
       });
   }
 
-
   getPage(){
-    this.router.navigate(['sellhistory']);
+    this.router.navigate([`backtoshophistory`]);
   }
-
-
-
-
 }

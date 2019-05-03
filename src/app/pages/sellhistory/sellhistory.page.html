@@ -1,18 +1,13 @@
 <ion-header>
   <ion-toolbar color="primary">
-
+      <ion-buttons slot="start">
+          <ion-back-button id="backButton" defaultHref="/sellproduct" text=""></ion-back-button>
+        </ion-buttons>
     <ion-title>
         <ion-text color="light">
-          <ion-text color="light" class="fw700">ขายสินค้าให้ลูกค้า {{name}}</ion-text>
+          <ion-text color="light" class="fw700">ประวัติการขายสินค้า </ion-text>
         </ion-text>
     </ion-title>
-
-    <ion-buttons slot="primary" (click)="getPage()">
-      <ion-button fill="solid" color="secondary">
-        ทั้งหมด
-        <!-- <ion-icon slot="end" name="stats"></ion-icon> -->
-      </ion-button>
-    </ion-buttons>
 
   </ion-toolbar>
 
@@ -40,7 +35,7 @@
 </ion-row>
 
 <div class="list-product">
- <ion-row style="border-bottom: 1px solid #ddd;" *ngFor="let item of resdata"> 
+ <ion-row style="border-bottom: 1px solid #ddd;" *ngFor="let item of resdata" (click)="getlits(item.pid)"> 
      <ion-col col>
          <ion-thumbnail>
              <img src="{{item.img}}" width="65px">
@@ -56,12 +51,5 @@
  </ion-row>
 </div>
 
-
-<ion-fab vertical="bottom" horizontal="end" slot="fixed" (click)="scan()">
-  <ion-fab-button>
-    <!-- <ion-icon name="barcode" ></ion-icon> -->
-    <fa-icon icon="qrcode" size="2x" ></fa-icon>
-  </ion-fab-button>
-</ion-fab>
 
 </ion-content>
