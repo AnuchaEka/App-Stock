@@ -1,8 +1,9 @@
 import { Component, OnInit , ViewChild } from '@angular/core';
 import { ApiService } from '../../services/api.service';
 import { Router,ActivatedRoute } from '@angular/router';
-import { LoadingController,IonInfiniteScroll,MenuController  } from '@ionic/angular';
-import { PhotoViewer } from '@ionic-native/photo-viewer/ngx';
+import { LoadingController,IonInfiniteScroll,MenuController ,ModalController } from '@ionic/angular';
+import { ImageViewerComponent } from '../../component/image-viewer/image-viewer.component';
+
 
 @Component({
   selector: 'app-stocklist',
@@ -20,8 +21,8 @@ export class StocklistPage implements OnInit {
     private route: ActivatedRoute,
     private api:ApiService,
     public loadingController: LoadingController,
-    private photoViewer: PhotoViewer,
     public menuCtrl: MenuController,
+    public modalController: ModalController
    ) { 
 
    }
@@ -59,9 +60,23 @@ export class StocklistPage implements OnInit {
       });
   }
 
-  zoom(img){
-    this.photoViewer.show(img);
+
+  async viewImage(src: string, title: string = '') {
+    const modal = await this.modalController.create({
+      component: ImageViewerComponent,
+      componentProps: {
+        imgSource: src,
+        imgTitle: title,
+      },
+      cssClass: 'modal-fullscreen',
+      keyboardClose: true,
+      showBackdrop: true
+    });
+
+    return await modal.present();
   }
+
+  
 
    
   async getItems(ev) {

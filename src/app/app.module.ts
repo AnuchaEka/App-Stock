@@ -17,9 +17,9 @@ import { Camera } from '@ionic-native/Camera/ngx';
 import { File } from '@ionic-native/File/ngx';
 import { WebView } from '@ionic-native/ionic-webview/ngx';
 import { FilePath } from '@ionic-native/file-path/ngx';
-import { PhotoViewer } from '@ionic-native/photo-viewer/ngx';
 
-import { StocklostPage } from './pages/stocklost/stocklost.page';
+
+
 import { BarcodeScanner } from '@ionic-native/barcode-scanner/ngx';
 
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
@@ -27,12 +27,19 @@ import { library } from '@fortawesome/fontawesome-svg-core';
 import { fas } from '@fortawesome/free-solid-svg-icons';
 import { far } from '@fortawesome/free-regular-svg-icons';
 import { fab } from '@fortawesome/free-brands-svg-icons';
-//import {DatePipe} from '@angular/common';
+
+// Modal Pages
+import { StocklostPageModule } from './pages/stocklost/stocklost.module';
+
+//Component
+import { ImageViewerComponent } from './component/image-viewer/image-viewer.component';
+
+
 library.add(fas, far,fab);
 
 @NgModule({
-  declarations: [AppComponent,StocklostPage],
-  entryComponents: [StocklostPage],
+  declarations: [AppComponent, ImageViewerComponent],
+  entryComponents: [ImageViewerComponent],
   imports: [
     BrowserModule, 
     IonicModule.forRoot(), 
@@ -42,7 +49,8 @@ library.add(fas, far,fab);
       driverOrder: ['indexeddb', 'sqlite', 'websql']
     }),
     HttpClientModule,
-    FontAwesomeModule
+    FontAwesomeModule,
+    StocklostPageModule
      
   ],
   providers: [
@@ -53,9 +61,8 @@ library.add(fas, far,fab);
     File,
     WebView,
     FilePath,
-    PhotoViewer,
     BarcodeScanner,
-    //DatePipe
+
   ],
   bootstrap: [AppComponent]
 })

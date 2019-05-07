@@ -1,0 +1,68 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-menu-button color="light"></ion-menu-button>
+    </ion-buttons>
+    <ion-title>
+        <ion-text color="light">
+          <ion-text color="light" class="fw700">เบิกสินค้าส่งบ้านยาดี</ion-text>
+        </ion-text>
+    </ion-title>
+    <!-- <ion-buttons slot="end">
+      <ion-button size="small" shape="round" color="medium" (click)="notifications()">
+        <ion-icon name="notifications"></ion-icon>
+        <ion-badge color="dark" slot="end">2</ion-badge>
+      </ion-button>
+    </ion-buttons> -->
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding-top >
+  
+  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+  
+  <ion-list >
+    
+    <div *ngIf="items?.length != 0 || items !=null">
+    <ion-item  *ngFor="let item of items"  >
+      <div item-start>
+        <img src="{{item.img}}"   class="img" (click)="viewImage(item.img, item.name)">
+      </div>
+     
+      <div >
+        <label>
+           {{ item.name }}
+       </label> 
+       <p class="p">
+         <strong>SKU : </strong> {{item.sku}}<br>
+         วันที่เบิก : {{item.date}}<br>
+         เวลา : {{item.time}}
+       </p>
+     
+      
+          <ion-badge color="secondary" slot="start" class="m-b-5">เบิก : {{item.qty}}</ion-badge>&nbsp;
+          <ion-badge color="tertiary" slot="end" class="m-b-5">ค้าง : {{item.qtysend}}</ion-badge>
+      
+ 
+        <!-- <p>
+          <ion-badge >โกดังเล็ก : {{item.qty}}</ion-badge>
+        </p> -->
+        <!-- <p> 
+        <ion-badge color="secondary">โกดังใหญ่ : {{item.qtybig}}</ion-badge>
+        </p> -->
+        
+       
+      </div>
+      <ion-button size="small" slot="end"  color="primary" (click)="getPage(item.bkg_id)" slot="end">เบิกสินค้า</ion-button>
+       
+    </ion-item>
+  </div>
+    <div  *ngIf="items?.length == 0 || items==null" class="itemnone">
+      <p style="color:red;">ไม่มีสินค้า</p>
+    </div>
+
+    
+  </ion-list>
+</ion-content>

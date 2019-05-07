@@ -51,10 +51,15 @@ export class LoginPage implements OnInit {
     let username =this.onLoginForm.value.u_username;
     let password = this.onLoginForm.value.u_password;
 
+    // console.log(username);
+
+    // console.log(password);
 
     await this.api.postData({'u_username':username,'u_password':password},'account/login')
     .subscribe(res => {
         //let id = res['status'];
+        console.log(res);
+        
         if(res.status==1){
 
           localStorage.setItem('userData',JSON.stringify(res))

@@ -3,6 +3,8 @@ import { BarcodeScanner, BarcodeScannerOptions } from '@ionic-native/barcode-sca
 
 import { ApiService } from '../../services/api.service';
 import { LoadingController } from '@ionic/angular';
+import { ActivatedRoute } from '@angular/router';
+
 
 @Component({
   selector: 'app-producttoshop',
@@ -21,14 +23,21 @@ export class ProducttoshopPage implements OnInit {
   userProfile;
   user;
 
+  bkgID;
+
   constructor(
     public scanner:BarcodeScanner,
     private api:ApiService,
     public loadingCtrl: LoadingController,
+    private route: ActivatedRoute,
     ) { 
 
       this.userProfile =this.api.getStore();
       this.user = this.userProfile.data;
+      this.bkgID = this.route.snapshot.paramMap.get('id');
+
+      //console.log(this.bkgID);
+      
 
   }
 
@@ -54,7 +63,7 @@ export class ProducttoshopPage implements OnInit {
 
     let userid = this.user.u_id;
      
-     this.api.postData({'code':data.text,'userid':userid},'stock/gotostockshop')
+     this.api.postData({'code':data.text,'userid':userid,'bgkID':this.bkgID},'stock/gotostockshop')
     .subscribe(res => {
         //let id = res['status'];
         if(res.status==1){
@@ -90,7 +99,7 @@ export class ProducttoshopPage implements OnInit {
     });
 
     await loading.present();
-    await this.api.getData('stock/showstockshop')
+    await this.api.getData('stock/showstockshop/'+this.bkgID)
       .subscribe(res => {
         //console.log(res);
         this.resdata = res;

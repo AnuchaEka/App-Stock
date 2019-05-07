@@ -32,7 +32,7 @@
     <div *ngIf="items?.length != 0 || items !=null">
     <ion-item  *ngFor="let item of items"  >
       <div item-start>
-        <img src="{{item.img}}"   class="img" (click)="zoom(item.img)">
+        <img src="{{item.img}}"   class="img" (click)="viewImage(item.img, item.name)">
       </div>
      
       <div (click)="getDetail(item.p_id,item.name)">

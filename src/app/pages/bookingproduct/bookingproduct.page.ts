@@ -1,8 +1,8 @@
 import { Component, OnInit , ViewChild } from '@angular/core';
 import { ApiService } from '../../services/api.service';
 import { Router,ActivatedRoute } from '@angular/router';
-import { LoadingController,IonInfiniteScroll,MenuController,AlertController,ToastController  } from '@ionic/angular';
-import { PhotoViewer } from '@ionic-native/photo-viewer/ngx';
+import { LoadingController,IonInfiniteScroll,AlertController,ToastController,ModalController  } from '@ionic/angular';
+import { ImageViewerComponent } from '../../component/image-viewer/image-viewer.component';
 
 @Component({
   selector: 'app-bookingproduct',
@@ -25,10 +25,9 @@ export class BookingproductPage implements OnInit {
     private route: ActivatedRoute,
     private api:ApiService,
     public loadingController: LoadingController,
-    private photoViewer: PhotoViewer,
-    public menuCtrl: MenuController,
     public alertCtrl: AlertController,
-    public toastCtrl: ToastController
+    public toastCtrl: ToastController,
+    public modalController: ModalController
    ) { 
 
     this.userProfile =this.api.getStore();
@@ -41,7 +40,7 @@ export class BookingproductPage implements OnInit {
 
   ionViewWillEnter() {
     this.getstock()
-    this.menuCtrl.enable(true);
+ 
   }
 
   doRefresh(event) {
@@ -69,9 +68,7 @@ export class BookingproductPage implements OnInit {
       });
   }
 
-  zoom(img){
-    this.photoViewer.show(img);
-  }
+ 
 
    
   async getItems(ev) {
@@ -95,6 +92,22 @@ export class BookingproductPage implements OnInit {
 
 
   }
+
+  async viewImage(src: string, title: string = '') {
+    const modal = await this.modalController.create({
+      component: ImageViewerComponent,
+      componentProps: {
+        imgSource: src,
+        imgTitle: title,
+      },
+      cssClass: 'modal-fullscreen',
+      keyboardClose: true,
+      showBackdrop: true
+    });
+
+    return await modal.present();
+  }
+
 
 
 

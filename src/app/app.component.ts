@@ -44,7 +44,7 @@ export class AppComponent {
     ,
     {
       title: 'เบิกสินค้าส่งบ้านยาดี',
-      url: '/producttoshop',
+      url: '/producttoshoplist',
       icon: 'store-alt',
       direct: 'forward',
     }
@@ -135,7 +135,7 @@ export class AppComponent {
     ,
     {
       title: 'เบิกสินค้าให้บ้านยาดี',
-      url: '/producttoshop',
+      url: '/producttoshoplist',
       icon: 'store-alt',
       direct: 'forward',
     }
@@ -235,11 +235,11 @@ export class AppComponent {
 
           //console.log(this.userProfile);
    
-         //this.navCtrl.navigateRoot('/stocklist');
+         this.navCtrl.navigateRoot('/stocklist');
           
         }else{
    
-          //this.navCtrl.navigateRoot('/login');
+          this.navCtrl.navigateRoot('/login');
          
         }
 

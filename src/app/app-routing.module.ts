@@ -23,14 +23,16 @@ const routes: Routes = [
   { path: 'cutstockhistorylist/:id/:name/:pid', loadChildren: './pages/cutstockhistorylist/cutstockhistorylist.module#CutstockhistorylistPageModule' },
   { path: 'backstockhistory/:id/:name', loadChildren: './pages/backstockhistory/backstockhistory.module#BackstockhistoryPageModule' },
   { path: 'backstockhistorylist/:id/:name/:pid', loadChildren: './pages/backstockhistorylist/backstockhistorylist.module#BackstockhistorylistPageModule' },
-  { path: 'producttoshop', loadChildren: './pages/producttoshop/producttoshop.module#ProducttoshopPageModule' },
+  { path: 'producttoshop/:id', loadChildren: './pages/producttoshop/producttoshop.module#ProducttoshopPageModule' },
   { path: 'confrimshop', loadChildren: './pages/confrimshop/confrimshop.module#ConfrimshopPageModule' },
   { path: 'sellproduct', loadChildren: './pages/sellproduct/sellproduct.module#SellproductPageModule' },
   { path: 'sellhistory', loadChildren: './pages/sellhistory/sellhistory.module#SellhistoryPageModule' },
   { path: 'sellhistorylist/:pid', loadChildren: './pages/sellhistorylist/sellhistorylist.module#SellhistorylistPageModule' },
   { path: 'backtoshopyadee', loadChildren: './pages/backtoshopyadee/backtoshopyadee.module#BacktoshopyadeePageModule' },
   { path: 'backtoshophistory', loadChildren: './pages/backtoshophistory/backtoshophistory.module#BacktoshophistoryPageModule' },
-  { path: 'backtoshophistorylist/:pid', loadChildren: './pages/backtoshophistorylist/backtoshophistorylist.module#BacktoshophistorylistPageModule' },  { path: 'bookingproduct', loadChildren: './pages/bookingproduct/bookingproduct.module#BookingproductPageModule' },
+  { path: 'backtoshophistorylist/:pid', loadChildren: './pages/backtoshophistorylist/backtoshophistorylist.module#BacktoshophistorylistPageModule' },
+  { path: 'bookingproduct', loadChildren: './pages/bookingproduct/bookingproduct.module#BookingproductPageModule' },
+  { path: 'producttoshoplist', loadChildren: './pages/producttoshoplist/producttoshoplist.module#ProducttoshoplistPageModule' },
 
 
 
