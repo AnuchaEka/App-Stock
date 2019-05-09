@@ -40,7 +40,7 @@
           <ion-content class="bg-profile">
             <ion-list>
                
-              <div >  <!-- *ngIf="user.role == 'ผู้ดูแลระบบ'" -->
+              <div *ngIf="user.role == 'ผู้ดูแลระบบ'">  <!-- *ngIf="user.role == 'ผู้ดูแลระบบ'" -->
               <ion-list-header color="dark">
                 <ion-label>ผู้ดูแลระบบ</ion-label>
               </ion-list-header>
@@ -58,7 +58,7 @@
 
             </div>
             
-            <div ><!-- *ngIf="user.role == 'พนักงานหน้าร้าน'" -->
+            <div *ngIf="user.role == 'ผู้ดูแลระบบ' || user.role == 'พนักงานหน้าร้าน'"><!-- *ngIf="user.role == 'พนักงานหน้าร้าน'" -->
                 <ion-list-header color="dark">
                     <ion-label>พนักงานหน้าร้าน</ion-label>
                   </ion-list-header>
@@ -73,7 +73,7 @@
               </ion-menu-toggle>
             </div>
             
-            <div > <!-- *ngIf="user.role == 'พนักงานสต๊อก'" -->
+            <div *ngIf="user.role == 'ผู้ดูแลระบบ' || user.role == 'พนักงานสต๊อก'"> <!-- *ngIf="user.role == 'พนักงานสต๊อก'" -->
                 <ion-list-header color="dark">
                     <ion-label>พนักงานสต๊อก</ion-label>
                   </ion-list-header>

@@ -85,7 +85,7 @@ export class EditprofilePage implements OnInit {
     this.validations_form = this.formBuilder.group({
 
       username: new FormControl(this.res.u_username, Validators.compose([
-        Validators.pattern('^[a-zA-Z0-9]+$'),
+        Validators.pattern('^[a-zA-Z0-9_]+$'),
         Validators.required
       ])),
       
@@ -105,7 +105,7 @@ export class EditprofilePage implements OnInit {
   validation_messages = {
     'username': [
       { type: 'required', message: 'กรอกชื่อผู้ใช้งานด้วยค่ะ!' },
-      { type: 'pattern', message: 'กรอก a-zA-Z0-9 เท่านั้นค่ะ!' },
+      { type: 'pattern', message: 'กรอก a-zA-Z0-9_ เท่านั้นค่ะ!' },
     ],
     'name': [
       { type: 'required', message: 'กรอกชื่อด้วยค่ะ!' }
