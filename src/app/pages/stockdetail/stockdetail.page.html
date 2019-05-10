@@ -15,11 +15,10 @@
         <ion-refresher-content></ion-refresher-content>
       </ion-refresher>
 
-        <ion-item *ngFor="let item of resdata"  class="item" (click)="open(item,id)">
+        <ion-item *ngFor="let item of resdata"  class="item" (click)="open(item.refif,id)">
             <ion-label> {{item.name}} </ion-label>
             <ion-badge slot="end">{{item.qty}}</ion-badge>
           </ion-item>
-
 
     </ion-content>
 

@@ -28,18 +28,19 @@ import { fas } from '@fortawesome/free-solid-svg-icons';
 import { far } from '@fortawesome/free-regular-svg-icons';
 import { fab } from '@fortawesome/free-brands-svg-icons';
 
-// Modal Pages
-import { StocklostPageModule } from './pages/stocklost/stocklost.module';
 
 //Component
 import { ImageViewerComponent } from './component/image-viewer/image-viewer.component';
+import { LostlistComponent } from './component/lostlist/lostlist.component';
+
+import { OneSignal } from '@ionic-native/onesignal/ngx';
 
 
 library.add(fas, far,fab);
 
 @NgModule({
-  declarations: [AppComponent, ImageViewerComponent],
-  entryComponents: [ImageViewerComponent],
+  declarations: [AppComponent, ImageViewerComponent,LostlistComponent],
+  entryComponents: [ImageViewerComponent,LostlistComponent],
   imports: [
     BrowserModule, 
     IonicModule.forRoot(), 
@@ -50,8 +51,7 @@ library.add(fas, far,fab);
     }),
     HttpClientModule,
     FontAwesomeModule,
-    StocklostPageModule
-     
+         
   ],
   providers: [
     StatusBar,
@@ -62,6 +62,7 @@ library.add(fas, far,fab);
     WebView,
     FilePath,
     BarcodeScanner,
+    OneSignal
 
   ],
   bootstrap: [AppComponent]

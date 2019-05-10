@@ -3,7 +3,9 @@ import { ApiService } from '../../services/api.service';
 import { Router,ActivatedRoute } from '@angular/router';
 import { LoadingController,  NavController, ModalController} from '@ionic/angular';
 
-import { StocklostPage } from './../stocklost/stocklost.page';
+
+import { LostlistComponent } from '../../component/lostlist/lostlist.component';
+
 
 @Component({
   selector: 'app-stockdetail',
@@ -70,14 +72,29 @@ export class StockdetailPage implements OnInit {
 
 
 
-  async open(item,id){
+  // async open(item,id){
+  //   const modal = await this.modal.create({
+  //     component: StocklostPage,
+  //     componentProps: { item: item,id:id }
+  //   });
+  //   return await modal.present();
+  // }
+
+
+  async open(item: number, id: string = '') {
     const modal = await this.modal.create({
-      component: StocklostPage,
-      componentProps: { item: item,id:id }
+      component: LostlistComponent,
+      componentProps: {
+        lostItem: item,
+        lostID: id,
+      },
+      cssClass: 'modal-fullscreen',
+      keyboardClose: true,
+      showBackdrop: true
     });
+
     return await modal.present();
   }
-
 
 
   

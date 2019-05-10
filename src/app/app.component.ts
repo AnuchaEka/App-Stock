@@ -7,6 +7,8 @@ import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { Router ,RouterEvent} from '@angular/router';
 import { AuthenService } from './services/authen.service';
 import { ApiService } from './services/api.service';
+import { OneSignal } from '@ionic-native/onesignal/ngx';
+
 
 @Component({
   selector: 'app-root',
@@ -88,7 +90,7 @@ export class AppComponent {
     }
     ,
     {
-      title: 'จอง/เบิกสินค้า',
+      title: 'ส่งเบิกสินค้า',
       url: '/bookingproduct',
       icon: 'bookmark',
       direct: 'forward',
@@ -153,7 +155,14 @@ export class AppComponent {
       url: '/confrimstock',
       icon: 'clipboard-check',
       direct: 'forward',
-    }
+    },
+    {
+          title: 'สินค้าใกล้จะหมด',
+          url: '/productdepleted',
+          icon: 'clipboard-check',
+          direct: 'forward',
+        }
+    
   ];
 
 
@@ -171,7 +180,8 @@ export class AppComponent {
     public navCtrl: NavController,
     private api:ApiService,
     private events: Events,
-    private menu: MenuController
+    private menu: MenuController,
+    private oneSignal: OneSignal
     
   ) {
     this.initializeApp();
@@ -244,6 +254,47 @@ export class AppComponent {
         }
 
       });
+
+
+      if (this.platform.is('cordova')) {
+
+        if (this.platform.is('android')) {
+          this.oneSignal.startInit('dfd8b431-057b-4f3f-a954-72736ca74850', '1040512901284');
+        }
+        if (this.platform.is('ios')) {
+          this.oneSignal.startInit('dfd8b431-057b-4f3f-a954-72736ca74850');
+        }
+      this.oneSignal.inFocusDisplaying(this.oneSignal.OSInFocusDisplayOption.Notification);
+      
+      this.oneSignal.handleNotificationReceived().subscribe(() => {
+          // do something when notification is received
+          this.navCtrl.navigateRoot('/bookingproduct');
+
+
+        });
+      this.oneSignal.handleNotificationOpened().subscribe(result => {
+          // do something when a notification is opened
+         //console.log(result);
+         
+         this.navCtrl.navigateRoot('/bookingproduct');
+
+
+
+        });
+      
+        this.oneSignal.endInit();
+      
+       // Then You Can Get Devices ID
+      
+         this.oneSignal.getIds().then(identity => {
+            //  alert(identity.pushToken + " It's Push Token");
+            //  alert(identity.userId + " It's Devices ID");
+             console.log(identity);
+             
+           });
+      
+          }
+          
 
       
     //   this.authen.authenticationState.subscribe(state => {

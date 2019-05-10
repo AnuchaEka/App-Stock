@@ -13,7 +13,7 @@ import { FilePath } from '@ionic-native/file-path/ngx';
  
 import { finalize } from 'rxjs/operators';
 import { SERVER_URL } from '../../../environments/environment';
-
+import { UPLOAD_URL } from '../../../environments/environment';
 
 @Component({
   selector: 'app-editprofile',
@@ -278,7 +278,7 @@ async uploadImageData(formData: FormData) {
   });
   await loading.present();
 
-  this.http.post( SERVER_URL+"account/upload/"+this.route.snapshot.paramMap.get('id'), formData)
+  this.http.post( UPLOAD_URL+"account/upload/"+this.route.snapshot.paramMap.get('id'), formData)
       .pipe(
           finalize(() => {
               loading.dismiss();
