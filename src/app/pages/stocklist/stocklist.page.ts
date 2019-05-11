@@ -1,7 +1,7 @@
 import { Component, OnInit , ViewChild } from '@angular/core';
 import { ApiService } from '../../services/api.service';
 import { Router,ActivatedRoute } from '@angular/router';
-import { LoadingController,IonInfiniteScroll,MenuController ,ModalController } from '@ionic/angular';
+import { LoadingController,IonInfiniteScroll,MenuController ,ModalController,Platform, } from '@ionic/angular';
 import { ImageViewerComponent } from '../../component/image-viewer/image-viewer.component';
 
 
@@ -15,19 +15,38 @@ export class StocklistPage implements OnInit {
 
  items =[];
  page=1;
-
+ userProfile;
+ res;
   constructor(
     private router: Router,
     private route: ActivatedRoute,
     private api:ApiService,
     public loadingController: LoadingController,
     public menuCtrl: MenuController,
-    public modalController: ModalController
+    public modalController: ModalController,
+    private platform: Platform
    ) { 
 
    }
 
   ngOnInit() {
+    
+    if (this.platform.is('cordova')) {
+    this.userProfile =this.api.getStore();
+    this.res = this.userProfile.data;
+    let Token =localStorage.getItem('Token');;
+    let userIdToken = localStorage.getItem('userIdToken');
+
+    this.api.postData({'Token':Token,'userIdToken':userIdToken,'userid':this.res.u_id},'fcmpush/savetoken')
+    .subscribe(res => {
+      
+   //let id = res['status'];
+
+       console.log(res);
+     });  
+    } 
+
+
   }
 
   ionViewWillEnter() {

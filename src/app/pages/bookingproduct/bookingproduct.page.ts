@@ -192,6 +192,8 @@ async alertLocation(pid,status,qtyall) {
             this.api.postData({'qty':this.yourqty,'userid':userid,'proid':pid,'status':status},'booking/save')
             .subscribe(res => {
                 //let id = res['status'];
+                console.log(res);
+                
                 if(res.status==1){
                  
                   this.api.presentToast(res.message);

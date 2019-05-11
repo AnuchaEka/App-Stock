@@ -159,7 +159,7 @@ export class AppComponent {
     {
           title: 'สินค้าใกล้จะหมด',
           url: '/productdepleted',
-          icon: 'clipboard-check',
+          icon: 'exclamation-triangle',
           direct: 'forward',
         }
     
@@ -206,12 +206,13 @@ export class AppComponent {
       this.userProfile =user.data;
       this.user.role = this.userProfile.u_position;
       this.img=user.img;
-
+ 
       this.api.getDataById('account/getUser',this.userProfile.u_id)
       .subscribe(res => {
           localStorage.setItem('userData',JSON.stringify(res))
           this.authen.editdata(res);
           sessionStorage.setItem('user_id',this.userProfile.u_id);
+          
         });
 
   
@@ -224,6 +225,55 @@ export class AppComponent {
     this.platform.ready().then(() => {
       this.statusBar.styleDefault();
       this.splashScreen.hide();
+
+
+      if (this.platform.is('cordova')) {
+
+        if (this.platform.is('android')) {
+          this.oneSignal.startInit('dfd8b431-057b-4f3f-a954-72736ca74850', '1040512901284');
+        }
+        if (this.platform.is('ios')) {
+          this.oneSignal.startInit('dfd8b431-057b-4f3f-a954-72736ca74850');
+        }
+      this.oneSignal.inFocusDisplaying(this.oneSignal.OSInFocusDisplayOption.Notification);
+      
+      this.oneSignal.handleNotificationReceived().subscribe((result) => {
+          // do something when notification is received
+
+          console.log(result);
+          
+          //this.navCtrl.navigateRoot('/producttoshoplist');
+
+
+        });
+      this.oneSignal.handleNotificationOpened().subscribe(result => {
+          // do something when a notification is opened
+         
+         console.log(result);
+
+         //this.navCtrl.navigateRoot('/producttoshoplist');
+
+
+
+        });
+      
+        this.oneSignal.endInit();
+      
+       // Then You Can Get Devices ID
+        
+         this.oneSignal.getIds().then(identity => {
+            //  alert(identity.pushToken + " It's Push Token");
+            //  alert(identity.userId + " It's Devices ID");
+          localStorage.setItem('Token',identity.pushToken);
+          localStorage.setItem('userIdToken',identity.userId)
+             //console.log(identity);
+               
+        });
+
+      
+          }
+
+
  
       this.api.getAuthen(data=>{
         if(data)
@@ -237,15 +287,13 @@ export class AppComponent {
           localStorage.setItem('userData',JSON.stringify(res))
           this.authen.editdata(res);
           sessionStorage.setItem('user_id',this.userProfile.u_id);
-
+       
 
         });
 
-
-
           //console.log(this.userProfile);
    
-         this.navCtrl.navigateRoot('/stocklist');
+         this.navCtrl.navigateRoot('/productdepleted');
           
         }else{
    
@@ -255,60 +303,6 @@ export class AppComponent {
 
       });
 
-
-      if (this.platform.is('cordova')) {
-
-        if (this.platform.is('android')) {
-          this.oneSignal.startInit('dfd8b431-057b-4f3f-a954-72736ca74850', '1040512901284');
-        }
-        if (this.platform.is('ios')) {
-          this.oneSignal.startInit('dfd8b431-057b-4f3f-a954-72736ca74850');
-        }
-      this.oneSignal.inFocusDisplaying(this.oneSignal.OSInFocusDisplayOption.Notification);
-      
-      this.oneSignal.handleNotificationReceived().subscribe(() => {
-          // do something when notification is received
-          this.navCtrl.navigateRoot('/bookingproduct');
-
-
-        });
-      this.oneSignal.handleNotificationOpened().subscribe(result => {
-          // do something when a notification is opened
-         //console.log(result);
-         
-         this.navCtrl.navigateRoot('/bookingproduct');
-
-
-
-        });
-      
-        this.oneSignal.endInit();
-      
-       // Then You Can Get Devices ID
-      
-         this.oneSignal.getIds().then(identity => {
-            //  alert(identity.pushToken + " It's Push Token");
-            //  alert(identity.userId + " It's Devices ID");
-             console.log(identity);
-             
-           });
-      
-          }
-          
-
-      
-    //   this.authen.authenticationState.subscribe(state => {
-
-    //     if (state!=null) {
-    //      this.userProfile=state.data;  
-    //      this.img=state.img;
-           
-    //      this.navCtrl.navigateRoot('/home');
-
-    //     }else{
-    //      this.navCtrl.navigateRoot('/login');
-    //     }
-    //  });
 
 
     });

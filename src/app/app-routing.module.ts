@@ -31,7 +31,8 @@ const routes: Routes = [
   { path: 'backtoshophistory', loadChildren: './pages/backtoshophistory/backtoshophistory.module#BacktoshophistoryPageModule' },
   { path: 'backtoshophistorylist/:pid', loadChildren: './pages/backtoshophistorylist/backtoshophistorylist.module#BacktoshophistorylistPageModule' },
   { path: 'bookingproduct', loadChildren: './pages/bookingproduct/bookingproduct.module#BookingproductPageModule' },
-  { path: 'producttoshoplist', loadChildren: './pages/producttoshoplist/producttoshoplist.module#ProducttoshoplistPageModule' },
+  { path: 'producttoshoplist', loadChildren: './pages/producttoshoplist/producttoshoplist.module#ProducttoshoplistPageModule' },  { path: 'productdepleted', loadChildren: './pages/productdepleted/productdepleted.module#ProductdepletedPageModule' },
+
 
 
 
