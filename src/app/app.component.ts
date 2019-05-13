@@ -36,42 +36,12 @@ export class AppComponent {
       icon: 'cubes',
       direct: 'forward',
     },
-    
     {
-      title: 'เบิกสินค้าส่งให้ลูกค้า',
-      url: '/cutstockshop',
-      icon: 'clipboard-list',
-      direct: 'forward',
-    }
-    ,
-    {
-      title: 'เบิกสินค้าส่งบ้านยาดี',
-      url: '/producttoshoplist',
-      icon: 'store-alt',
-      direct: 'forward',
-    }
-    ,
-    {
-      title: 'รับสินค้าคืนจากลูกค้า',
-      url: '/backtoshop',
-      icon: 'undo-alt',
-      direct: 'forward',
-    }
-    ,
-    {
-      title: 'เบิกสินค้าจากโกดังใหญ่',
-      url: '/producttostock',
-      icon: 'warehouse',
-      direct: 'forward',
-    }
-
-    ,
-    {
-      title: 'ตรวจรับสินค้าเข้าโกดังเล็ก',
-      url: '/confrimstock',
-      icon: 'clipboard-check',
-      direct: 'forward',
-    }
+          title: 'สินค้าใกล้จะหมด',
+          url: '/productdepleted',
+          icon: 'exclamation-triangle',
+          direct: 'forward',
+        }
   ];
 
   public appPagesShop = [
@@ -293,7 +263,7 @@ export class AppComponent {
 
           //console.log(this.userProfile);
    
-         this.navCtrl.navigateRoot('/productdepleted');
+         this.navCtrl.navigateRoot('/stocklist');
           
         }else{
    

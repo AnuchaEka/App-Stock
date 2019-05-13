@@ -27,26 +27,27 @@ export class StocklistPage implements OnInit {
     private platform: Platform
    ) { 
 
+      
+    if (this.platform.is('cordova')) {
+      this.userProfile =this.api.getStore();
+      this.res = this.userProfile.data;
+      let Token =localStorage.getItem('Token');;
+      let userIdToken = localStorage.getItem('userIdToken');
+  
+      this.api.postData({'Token':Token,'userIdToken':userIdToken,'userid':this.res.u_id},'fcmpush/savetoken')
+      .subscribe(res => {
+        
+     //let id = res['status'];
+  
+         console.log(res);
+       });  
+      } 
+
+      
    }
 
   ngOnInit() {
-    
-    if (this.platform.is('cordova')) {
-    this.userProfile =this.api.getStore();
-    this.res = this.userProfile.data;
-    let Token =localStorage.getItem('Token');;
-    let userIdToken = localStorage.getItem('userIdToken');
-
-    this.api.postData({'Token':Token,'userIdToken':userIdToken,'userid':this.res.u_id},'fcmpush/savetoken')
-    .subscribe(res => {
-      
-   //let id = res['status'];
-
-       console.log(res);
-     });  
-    } 
-
-
+  
   }
 
   ionViewWillEnter() {
