@@ -21,7 +21,7 @@ export class AppComponent {
   img:any;
   res;
   userProfile;
-  version = '2.0.0'
+  version = '2.0.2'
 
   public appPages = [
     // {
@@ -60,7 +60,7 @@ export class AppComponent {
     }
     ,
     {
-      title: 'ส่งเบิกสินค้า',
+      title: 'ส่งเบิกสินค้าจากสต๊อก',
       url: '/bookingproduct',
       icon: 'bookmark',
       direct: 'forward',
@@ -92,7 +92,7 @@ export class AppComponent {
     },
     
     {
-      title: 'เบิกสินค้าส่งบ้านยาดี',
+      title: 'เบิกสินค้าส่งลูกค้า',
       url: '/cutstockshop',
       icon: 'clipboard-list',
       direct: 'forward',
@@ -106,7 +106,7 @@ export class AppComponent {
     }
     ,
     {
-      title: 'เบิกสินค้าให้บ้านยาดี',
+      title: 'เบิกสินค้าส่งบ้านยาดี',
       url: '/producttoshoplist',
       icon: 'store-alt',
       direct: 'forward',
@@ -254,6 +254,11 @@ export class AppComponent {
         
           this.api.getDataById('account/getUser',this.userProfile.u_id)
       .subscribe(res => {
+
+        if(!res){
+          this.authen.logout();
+          this.navCtrl.navigateRoot('/login');
+        }
           localStorage.setItem('userData',JSON.stringify(res))
           this.authen.editdata(res);
           sessionStorage.setItem('user_id',this.userProfile.u_id);
